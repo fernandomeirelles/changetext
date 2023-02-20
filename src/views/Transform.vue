@@ -52,10 +52,6 @@
                 <label for="comma-separated">Separar por vírgula</label>
                 <input type="checkbox" id="comma-separated" v-model="transforms.commaSeparated">
             </div>
-            <!-- <div>
-                <label for="remove-accents">Remover acentos</label>
-                <input type="checkbox" id="remove-accents" v-model="transforms.removeAccents">
-            </div> -->
             <div>
                 <label for="remove-special-chars">Remover caracteres especiais</label>
                 <input type="checkbox" id="remove-special-chars" v-model="transforms.removeSpecialChars">
@@ -143,10 +139,6 @@
             </div>
 
 
-            <!-- <div>
-                <label for="replacement">Remover Caracteres de Substituição</label>
-                <input type="checkbox" id="replacement" v-model="transforms.removeReplacement">
-            </div> -->
             <div>
                 <label for="non-ascii">Remover Caracteres Não ASCII</label>
                 <input type="checkbox" id="non-ascii" v-model="transforms.removeNonAscii">
@@ -242,7 +234,6 @@ export default {
             transforms: {
                 reverse: false,
                 commaSeparated: false,
-                //removeAccents: false,
                 removeSpecialChars: false,
                 replaceSpaces: false,
 
@@ -254,7 +245,6 @@ export default {
                 //replaceTabCount: 4,
                 //replaceTab: false,
                 removeBlankLines: false,
-                //replaceLineBreak: false,
                 multipleSpaces: false,
                 multipleLines: false,
                 removeLineBreaks: false,
@@ -262,7 +252,6 @@ export default {
                 stripEmojis: false,
                 removeAccents: false,
                 normalizeUunicode: false,
-                //removeReplacement: false,
                 removeNonAscii: false,
                 removeNonAlphanumeric: false,
                 stripAllEmails: false,
@@ -315,7 +304,6 @@ export default {
             }
 
             if (this.transforms.removeSpecialChars) {
-                //result = result.replace(/[^\w\s]|_/g, '')
                 result = result.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\w\s]/gi, '')
             }
 
@@ -351,16 +339,11 @@ export default {
                 result = result.replace(/\n\s*\n/g, "\n");
             }
 
-            /* if (this.transforms.replaceLineBreak) {
-                result = result.replace(/(\r\n|\n|\r)/gm, this.transforms.replaceLineBreak);
-            } */
-
             if (this.transforms.multipleSpaces) {
                 result = result.replace(/  +/gm, ' ');
             }
 
             if (this.transforms.multipleLines) {
-                //result = result.replace(/\n{2,}/gm, '\n');
                 result = result.replace(/(\r\n|\r|\n){2,}/g, "\n\n");
             }
 
@@ -369,20 +352,10 @@ export default {
             }
 
             if (this.transforms.removePunctuation) {
-                //result = result.replace(/[^\w\s]|_/gm, '');
-                //result = result.replace(/[\p{P}\p{S}]/gu, '');
-                //result = result.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
-                //result = result.replace(/\W|_/g, '');
-                //const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
-
                 result = result.replace(/[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g, "");
-
-
             }
 
             if (this.transforms.stripEmojis) {
-                //result = result.replace(/[\u{1F600}-\u{1F64F}]/gu, '');
-                //result = result.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '');
                 result = result.replaceAll(/\p{Emoji}/ug, '')
             }
 
@@ -391,18 +364,8 @@ export default {
             }
 
             if (this.transforms.normalizeUunicode) {
-                //result = result.normalize('NFKD');
-                //result = result.normalize('NFC');
-                //result = unescape(JSON.parse(result));
-                //result = decodeURIComponent(escape(result))
-                //result = String.fromCharCode(parseInt(result,16))                
-                //result = result.normalize('NFD').replace(/[\u0300-\u036f]/g, '');\
                 result = result.normalize('NFKD').replace(/\\u([\d\w]{4})/gi, (match, group) => String.fromCharCode(parseInt(group, 16)));
             }
-
-            /* if (this.transforms.removeReplacement) {
-                result = result.replace(/\ufffd/g, '');
-            } */
 
             if (this.transforms.removeNonAscii) {
                 result = result.replace(/[^\x00-\x7F]/g, '');
@@ -421,9 +384,6 @@ export default {
             }
 
             if (this.transforms.unescapeHtml) {
-                //const doc = new DOMParser().parseFromString(result, 'text/html');
-                //result = doc.documentElement.textContent;
-
                 result = result.replace(/\&\w+\;/g, '');
             }
 
@@ -450,14 +410,6 @@ export default {
             }
 
             if (this.transforms.decodeHtmlEntities) {
-                /* const element = document.createElement('textarea')
-                element.innerHTML = result
-                result = element.value */
-                //result = result.decode(encodedString);
-
-                //const parser = new DOMParser()
-                //result = result.parseFromString(`<!doctype html><body>${encodedString}`, 'text/html').body.textContent
-
                 const el = document.createElement('div');
                 el.innerHTML = result;
                 result = el.textContent;
