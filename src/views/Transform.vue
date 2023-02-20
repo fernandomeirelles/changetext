@@ -2,10 +2,11 @@
     <div class="p-4">
         <div class="mb-4">
             <label class="font-bold mb-2" for="input-text">Texto de entrada:</label>
-            <textarea class="border w-full py-2 px-3 rounded" v-model="inputText" rows="5" cols="50"></textarea>
+            <textarea class="border w-full py-2 px-3 rounded" v-model="inputText" rows="10" cols="100"></textarea>
             <label class="font-bold mb-2" for="input-text">Texto de saída:</label>
-            <textarea class="border w-full py-2 px-3 rounded" readonly v-model="outputText" rows="5" cols="50"></textarea>
+            <textarea class="border w-full py-2 px-3 rounded" readonly v-model="outputText" rows="10" cols="100"></textarea>
         </div>
+        
         <div class="mb-4">
             <legend class="font-bold mb-2">Formatar texto:</legend>
             <div class="mb-2">
@@ -40,6 +41,7 @@
                 </label>
             </div>
         </div>
+
         <div>
             <legend class="font-bold">Opções de transformação:</legend>
             <div>
@@ -50,10 +52,10 @@
                 <label for="comma-separated">Separar por vírgula</label>
                 <input type="checkbox" id="comma-separated" v-model="transforms.commaSeparated">
             </div>
-            <div>
+            <!-- <div>
                 <label for="remove-accents">Remover acentos</label>
                 <input type="checkbox" id="remove-accents" v-model="transforms.removeAccents">
-            </div>
+            </div> -->
             <div>
                 <label for="remove-special-chars">Remover caracteres especiais</label>
                 <input type="checkbox" id="remove-special-chars" v-model="transforms.removeSpecialChars">
@@ -82,7 +84,7 @@
                 <input type="checkbox" id="remove-trailing-spaces" v-model="transforms.removeTrailingSpaces">
             </div>
 
-            <div>
+            <!-- <div>
                 <label for="replace-space">Substituir espaços por</label>
                 <input type="checkbox" id="replace-space" v-model="transforms.replaceSpace">
                 <input type="number" id="replace-space-count" v-model="transforms.replaceSpaceCount" min="1">
@@ -92,17 +94,17 @@
                 <label for="replace-tab">Substituir tabulações por</label>
                 <input type="checkbox" id="replace-tab" v-model="transforms.replaceTab">
                 <input type="number" id="replace-tab-count" v-model="transforms.replaceTabCount" min="1">
-            </div>
+            </div> -->
 
             <div>
                 <label for="remove-blank-lines">Remover linhas em branco</label>
                 <input type="checkbox" id="remove-blank-lines" v-model="transforms.removeBlankLines">
             </div>
 
-            <div>
+            <!-- <div>
                 <label for="replace-line-break">Substituir quebras de linha por</label>
                 <input type="checkbox" id="replace-line-break" v-model="transforms.replaceLineBreak">
-            </div>
+            </div> -->
 
             <div>
                 <label for="multiple-spaces">Remover espaços múltiplos</label>
@@ -141,10 +143,10 @@
             </div>
 
 
-            <div>
+            <!-- <div>
                 <label for="replacement">Remover Caracteres de Substituição</label>
                 <input type="checkbox" id="replacement" v-model="transforms.removeReplacement">
-            </div>
+            </div> -->
             <div>
                 <label for="non-ascii">Remover Caracteres Não ASCII</label>
                 <input type="checkbox" id="non-ascii" v-model="transforms.removeNonAscii">
@@ -166,7 +168,7 @@
 
             <legend class="font-bold">HTML:</legend>
             <div>
-                <label for="unescape">Desfazer Escape de HTML</label>
+                <label for="unescape">Remover Escapes de HTML</label>
                 <input type="checkbox" id="unescape" v-model="transforms.unescapeHtml">
             </div>
             <div>
@@ -191,13 +193,23 @@
             </div>
 
             <div>
+                <label for="removeStyles">Remover todos os atributos</label>
+                <input type="checkbox" id="removeStyles" v-model="transforms.removeAllAttributes">
+            </div>
+
+            <div>
                 <label for="decodeHtmlEntities">Decodificar entidades de caracteres HTML</label>
                 <input type="checkbox" id="decodeHtmlEntities" v-model="transforms.decodeHtmlEntities">
             </div>
 
             <div>
-                <label for="decodeUrl">Decodificar caracteres codificados em URL</label>
+                <label for="decodeUrl">Decodificar caracteres em URL</label>
                 <input type="checkbox" id="decodeUrl" v-model="transforms.decodeUrl">
+            </div>
+
+            <div>
+                <label for="decodeUrl">Encodar caracteres em URL</label>
+                <input type="checkbox" id="decodeUrl" v-model="transforms.encodeUrl">
             </div>
 
 
@@ -230,19 +242,19 @@ export default {
             transforms: {
                 reverse: false,
                 commaSeparated: false,
-                removeAccents: false,
+                //removeAccents: false,
                 removeSpecialChars: false,
                 replaceSpaces: false,
 
                 trim: false,
                 removeLeadingSpaces: false,
                 removeTrailingSpaces: false,
-                replaceSpaceCount: 1,
-                replaceSpace: false,
-                replaceTabCount: 4,
-                replaceTab: false,
+                //replaceSpaceCount: 1,
+                //replaceSpace: false,
+                //replaceTabCount: 4,
+                //replaceTab: false,
                 removeBlankLines: false,
-                replaceLineBreak: false,
+                //replaceLineBreak: false,
                 multipleSpaces: false,
                 multipleLines: false,
                 removeLineBreaks: false,
@@ -250,7 +262,7 @@ export default {
                 stripEmojis: false,
                 removeAccents: false,
                 normalizeUunicode: false,
-                removeReplacement: false,
+                //removeReplacement: false,
                 removeNonAscii: false,
                 removeNonAlphanumeric: false,
                 stripAllEmails: false,
@@ -261,8 +273,10 @@ export default {
                 removeIds: false,
                 removeClasses: false,
                 removeStyles: false,
+                removeAllAttributes: false,
                 decodeHtmlEntities: false,
                 decodeUrl: false,
+                encodeUrl: false,
                 removeUrls: false,
                 convertUrlsToLinks: false,
             },
@@ -300,14 +314,6 @@ export default {
                 result = result.split('').reverse().join('')
             }
 
-            if (this.transforms.commaSeparated) {
-                result = result.split(' ').join(', ')
-            }
-
-            if (this.transforms.removeAccents) {
-                result = result.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-            }
-
             if (this.transforms.removeSpecialChars) {
                 //result = result.replace(/[^\w\s]|_/g, '')
                 result = result.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\w\s]/gi, '')
@@ -331,28 +337,31 @@ export default {
                 result = result.replace(/\s+$/gm, '');
             }
 
+            /* 
             if (this.transforms.replaceSpace) {
                 result = result.replace(/ /gm, this.transforms.replaceSpaceCount);
             }
 
             if (this.transforms.replaceTab) {
                 result = result.replace(/\t/gm, this.transforms.replaceTabCount);
-            }
+            } */
 
             if (this.transforms.removeBlankLines) {
-                result = result.replace(/^\s*\n/gm, '');
+                //result = result.replace(/^\s*\n/gm, '');
+                result = result.replace(/\n\s*\n/g, "\n");
             }
 
-            if (this.transforms.replaceLineBreak) {
+            /* if (this.transforms.replaceLineBreak) {
                 result = result.replace(/(\r\n|\n|\r)/gm, this.transforms.replaceLineBreak);
-            }
+            } */
 
             if (this.transforms.multipleSpaces) {
                 result = result.replace(/  +/gm, ' ');
             }
 
             if (this.transforms.multipleLines) {
-                result = result.replace(/\n{2,}/gm, '\n');
+                //result = result.replace(/\n{2,}/gm, '\n');
+                result = result.replace(/(\r\n|\r|\n){2,}/g, "\n\n");
             }
 
             if (this.transforms.removeLineBreaks) {
@@ -360,11 +369,21 @@ export default {
             }
 
             if (this.transforms.removePunctuation) {
-                result = result.replace(/[^\w\s]|_/gm, '');
+                //result = result.replace(/[^\w\s]|_/gm, '');
+                //result = result.replace(/[\p{P}\p{S}]/gu, '');
+                //result = result.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
+                //result = result.replace(/\W|_/g, '');
+                //const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
+
+                result = result.replace(/[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g, "");
+
+
             }
 
             if (this.transforms.stripEmojis) {
-                result = result.replace(/[\u{1F600}-\u{1F64F}]/gu, '');
+                //result = result.replace(/[\u{1F600}-\u{1F64F}]/gu, '');
+                //result = result.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '');
+                result = result.replaceAll(/\p{Emoji}/ug, '')
             }
 
             if (this.transforms.removeAccents) {
@@ -372,12 +391,18 @@ export default {
             }
 
             if (this.transforms.normalizeUunicode) {
-                result = result.normalize('NFKD');
+                //result = result.normalize('NFKD');
+                //result = result.normalize('NFC');
+                //result = unescape(JSON.parse(result));
+                //result = decodeURIComponent(escape(result))
+                //result = String.fromCharCode(parseInt(result,16))                
+                //result = result.normalize('NFD').replace(/[\u0300-\u036f]/g, '');\
+                result = result.normalize('NFKD').replace(/\\u([\d\w]{4})/gi, (match, group) => String.fromCharCode(parseInt(group, 16)));
             }
 
-            if (this.transforms.removeReplacement) {
+            /* if (this.transforms.removeReplacement) {
                 result = result.replace(/\ufffd/g, '');
-            }
+            } */
 
             if (this.transforms.removeNonAscii) {
                 result = result.replace(/[^\x00-\x7F]/g, '');
@@ -396,8 +421,10 @@ export default {
             }
 
             if (this.transforms.unescapeHtml) {
-                const doc = new DOMParser().parseFromString(result, 'text/html');
-                result = doc.documentElement.textContent;
+                //const doc = new DOMParser().parseFromString(result, 'text/html');
+                //result = doc.documentElement.textContent;
+
+                result = result.replace(/\&\w+\;/g, '');
             }
 
             if (this.transforms.stripAllHtml) {
@@ -418,14 +445,30 @@ export default {
                 result = result.replace(/ style="[^"]*"/g, '')
             }
 
+            if (this.transforms.removeAllAttributes) {
+                result = result.replace(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g, '');
+            }
+
             if (this.transforms.decodeHtmlEntities) {
-                const element = document.createElement('textarea')
+                /* const element = document.createElement('textarea')
                 element.innerHTML = result
-                result = element.value
+                result = element.value */
+                //result = result.decode(encodedString);
+
+                //const parser = new DOMParser()
+                //result = result.parseFromString(`<!doctype html><body>${encodedString}`, 'text/html').body.textContent
+
+                const el = document.createElement('div');
+                el.innerHTML = result;
+                result = el.textContent;
             }
 
             if (this.transforms.decodeUrl) {
                 result = decodeURIComponent(result)
+            }
+
+            if (this.transforms.encodeUrl) {
+                result = encodeURIComponent(result)
             }
 
             if (this.transforms.removeUrls) {
@@ -436,7 +479,9 @@ export default {
                 result = result.replace(/(https?:\/\/\S+)/g, '<a href="$1">$1</a>')
             }
 
-
+            if (this.transforms.commaSeparated) {
+                result = result.split(' ').join(', ')
+            }
 
             this.outputText = result
         },
