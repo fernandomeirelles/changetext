@@ -42,182 +42,10 @@
             </div>
         </div>
 
-        <div>
-            <legend class="font-bold">Opções de transformação:</legend>
-            <div>
-                <label for="reverse">Inverter</label>
-                <input type="checkbox" id="reverse" v-model="transforms.reverse">
-            </div>
-            <div>
-                <label for="comma-separated">Separar por vírgula</label>
-                <input type="checkbox" id="comma-separated" v-model="transforms.commaSeparated">
-            </div>
-            <div>
-                <label for="remove-special-chars">Remover caracteres especiais</label>
-                <input type="checkbox" id="remove-special-chars" v-model="transforms.removeSpecialChars">
-            </div>
-            <div>
-                <label for="replace-spaces-checkbox">Substituir espaços por -</label>
-                <input type="checkbox" id="replace-spaces-checkbox" v-model="transforms.replaceSpaces">
-            </div>
+        <div v-for="(value, key) in transforms" :key="key">
+            <input type="checkbox" :id="key" v-model="transforms[key].value">
+            <label class="ml-2" :for="key">{{ transforms[key].label }}</label>
         </div>
-
-
-        <div>
-            <legend class="font-bold">Whitespace:</legend>
-            <div>
-                <label for="trim">Remover espaços no início e no fim</label>
-                <input type="checkbox" id="trim" v-model="transforms.trim">
-            </div>
-
-            <div>
-                <label for="remove-leading-spaces">Remover espaços no início de cada linha</label>
-                <input type="checkbox" id="remove-leading-spaces" v-model="transforms.removeLeadingSpaces">
-            </div>
-
-            <div>
-                <label for="remove-trailing-spaces">Remover espaços no final de cada linha</label>
-                <input type="checkbox" id="remove-trailing-spaces" v-model="transforms.removeTrailingSpaces">
-            </div>
-
-            <!-- <div>
-                <label for="replace-space">Substituir espaços por</label>
-                <input type="checkbox" id="replace-space" v-model="transforms.replaceSpace">
-                <input type="number" id="replace-space-count" v-model="transforms.replaceSpaceCount" min="1">
-            </div>
-
-            <div>
-                <label for="replace-tab">Substituir tabulações por</label>
-                <input type="checkbox" id="replace-tab" v-model="transforms.replaceTab">
-                <input type="number" id="replace-tab-count" v-model="transforms.replaceTabCount" min="1">
-            </div> -->
-
-            <div>
-                <label for="remove-blank-lines">Remover linhas em branco</label>
-                <input type="checkbox" id="remove-blank-lines" v-model="transforms.removeBlankLines">
-            </div>
-
-            <!-- <div>
-                <label for="replace-line-break">Substituir quebras de linha por</label>
-                <input type="checkbox" id="replace-line-break" v-model="transforms.replaceLineBreak">
-            </div> -->
-
-            <div>
-                <label for="multiple-spaces">Remover espaços múltiplos</label>
-                <input type="checkbox" id="multiple-spaces" v-model="transforms.multipleSpaces">
-            </div>
-
-            <div>
-                <label for="multiple-lines">Remover linhas múltiplas</label>
-                <input type="checkbox" id="multiple-lines" v-model="transforms.multipleLines">
-            </div>
-
-            <div>
-                <label for="remove-line-breaks">Remover quebras de linha</label>
-                <input type="checkbox" id="remove-line-breaks" v-model="transforms.removeLineBreaks">
-            </div>
-
-            <legend class="font-bold">Characters:</legend>
-            <div>
-                <label for="remove-punctuation">Remover pontuação</label>
-                <input type="checkbox" id="remove-punctuation" v-model="transforms.removePunctuation">
-            </div>
-
-            <div>
-                <label for="strip-emojis">Remover emojis</label>
-                <input type="checkbox" id="strip-emojis" v-model="transforms.stripEmojis">
-            </div>
-
-            <div>
-                <label for="remove-accents">Remover acentos</label>
-                <input type="checkbox" id="remove-accents" v-model="transforms.removeAccents">
-            </div>
-
-            <div>
-                <label for="normalize-unicode">Normalizar caracteres unicode</label>
-                <input type="checkbox" id="normalize-unicode" v-model="transforms.normalizeUunicode">
-            </div>
-
-
-            <div>
-                <label for="non-ascii">Remover Caracteres Não ASCII</label>
-                <input type="checkbox" id="non-ascii" v-model="transforms.removeNonAscii">
-            </div>
-            <div>
-                <label for="non-alphanumeric">Remover Caracteres Não Alfanuméricos</label>
-                <input type="checkbox" id="non-alphanumeric" v-model="transforms.removeNonAlphanumeric">
-            </div>
-
-            <legend class="font-bold">Other:</legend>
-            <div>
-                <label for="emails">Remover Todos os E-mails</label>
-                <input type="checkbox" id="emails" v-model="transforms.stripAllEmails">
-            </div>
-            <div>
-                <label for="bbcode">Remover BBCode</label>
-                <input type="checkbox" id="bbcode" v-model="transforms.removeBbcode">
-            </div>
-
-            <legend class="font-bold">HTML:</legend>
-            <div>
-                <label for="unescape">Remover Escapes de HTML</label>
-                <input type="checkbox" id="unescape" v-model="transforms.unescapeHtml">
-            </div>
-            <div>
-                <label for="strip">Remover Todo o HTML</label>
-                <input type="checkbox" id="strip" v-model="transforms.stripAllHtml">
-            </div>
-
-
-            <div>
-                <label for="removeIds">Remover todos os ids</label>
-                <input type="checkbox" id="removeIds" v-model="transforms.removeIds">
-            </div>
-
-            <div>
-                <label for="removeClasses">Remover todas as classes</label>
-                <input type="checkbox" id="removeClasses" v-model="transforms.removeClasses">
-            </div>
-
-            <div>
-                <label for="removeStyles">Remover estilos inline</label>
-                <input type="checkbox" id="removeStyles" v-model="transforms.removeStyles">
-            </div>
-
-            <div>
-                <label for="removeStyles">Remover todos os atributos</label>
-                <input type="checkbox" id="removeStyles" v-model="transforms.removeAllAttributes">
-            </div>
-
-            <div>
-                <label for="decodeHtmlEntities">Decodificar entidades de caracteres HTML</label>
-                <input type="checkbox" id="decodeHtmlEntities" v-model="transforms.decodeHtmlEntities">
-            </div>
-
-            <div>
-                <label for="decodeUrl">Decodificar caracteres em URL</label>
-                <input type="checkbox" id="decodeUrl" v-model="transforms.decodeUrl">
-            </div>
-
-            <div>
-                <label for="decodeUrl">Encodar caracteres em URL</label>
-                <input type="checkbox" id="decodeUrl" v-model="transforms.encodeUrl">
-            </div>
-
-
-            <legend class="font-bold">Links:</legend>
-            <div>
-                <label for="removeUrls">Remover todos os URLs da web</label>
-                <input type="checkbox" id="removeUrls" v-model="transforms.removeUrls">
-            </div>
-
-            <div>
-                <label for="convertUrlsToLinks">Converter URLs para links</label>
-                <input type="checkbox" id="convertUrlsToLinks" v-model="transforms.convertUrlsToLinks">
-            </div>
-
-        </div>
-
 
         <div>
             <button @click="transformText">Transformar</button>
@@ -232,42 +60,122 @@ export default {
             inputText: '',
             selectedFormat: 'notChange',
             transforms: {
-                reverse: false,
-                commaSeparated: false,
-                removeSpecialChars: false,
-                replaceSpaces: false,
-
-                trim: false,
-                removeLeadingSpaces: false,
-                removeTrailingSpaces: false,
-                //replaceSpaceCount: 1,
-                //replaceSpace: false,
-                //replaceTabCount: 4,
-                //replaceTab: false,
-                removeBlankLines: false,
-                multipleSpaces: false,
-                multipleLines: false,
-                removeLineBreaks: false,
-                removePunctuation: false,
-                stripEmojis: false,
-                removeAccents: false,
-                normalizeUunicode: false,
-                removeNonAscii: false,
-                removeNonAlphanumeric: false,
-                stripAllEmails: false,
-                removeBbcode: false,
-                unescapeHtml: false,
-                stripAllHtml: false,
-
-                removeIds: false,
-                removeClasses: false,
-                removeStyles: false,
-                removeAllAttributes: false,
-                decodeHtmlEntities: false,
-                decodeUrl: false,
-                encodeUrl: false,
-                removeUrls: false,
-                convertUrlsToLinks: false,
+                reverse: {
+                    value: false,
+                    label: "Inverter"
+                },
+                commaSeparated: {
+                    value: false,
+                    label: "Separado por vírgula"
+                },
+                removeSpecialChars: {
+                    value: false,
+                    label: "Remover caracteres especiais"
+                },
+                trim: {
+                    value: false,
+                    label: "Remover espaços em branco"
+                },
+                removeLeadingSpaces: {
+                    value: false,
+                    label: "Remover espaços no início das linhas"
+                },
+                removeTrailingSpaces: {
+                    value: false,
+                    label: "Remover espaços no final das linhas"
+                },
+                removeBlankLines: {
+                    value: false,
+                    label: "Remover linhas em branco"
+                },
+                multipleSpaces: {
+                    value: false,
+                    label: "Substituir múltiplos espaços por um único espaço"
+                },
+                multipleLines: {
+                    value: false,
+                    label: "Substituir múltiplas quebras de linha por uma única quebra de linha"
+                },
+                removeLineBreaks: {
+                    value: false,
+                    label: "Remover quebras de linha"
+                },
+                removePunctuation: {
+                    value: false,
+                    label: "Remover pontuação"
+                },
+                stripEmojis: {
+                    value: false,
+                    label: "Remover emojis"
+                },
+                removeAccents: {
+                    value: false,
+                    label: "Remover acentos"
+                },
+                normalizeUnicode: {
+                    value: false,
+                    label: "Normalizar caracteres Unicode"
+                },
+                removeNonAscii: {
+                    value: false,
+                    label: "Remover caracteres não ASCII"
+                },
+                removeNonAlphanumeric: {
+                    value: false,
+                    label: "Remover caracteres não alfanuméricos"
+                },
+                stripAllEmails: {
+                    value: false,
+                    label: "Remover endereços de email"
+                },
+                removeBbcode: {
+                    value: false,
+                    label: "Remover BBCode"
+                },
+                unescapeHtml: {
+                    value: false,
+                    label: "Desescapar HTML"
+                },
+                stripAllHtml: {
+                    value: false,
+                    label: "Remover HTML"
+                },
+                removeIds: {
+                    value: false,
+                    label: "Remover IDs"
+                },
+                removeClasses: {
+                    value: false,
+                    label: "Remover classes"
+                },
+                removeStyles: {
+                    value: false,
+                    label: "Remover estilos"
+                },
+                removeAllAttributes: {
+                    value: false,
+                    label: "Remover todos os atributos"
+                },
+                decodeHtmlEntities: {
+                    value: false,
+                    label: "Decodificar entidades HTML"
+                },
+                decodeUrl: {
+                    value: false,
+                    label: "Decodificar URLs"
+                },
+                encodeUrl: {
+                    value: false,
+                    label: "Codificar URLs"
+                },
+                removeUrls: {
+                    value: false,
+                    label: "Remover URLs"
+                },
+                convertUrlsToLinks: {
+                    value: false,
+                    label: "Converter URLs em links"
+                }
             },
             outputText: ''
         }
@@ -299,25 +207,19 @@ export default {
                     break
             }
 
-            if (this.transforms.reverse) {
+            if (this.transforms.reverse.value) {
                 result = result.split('').reverse().join('')
             }
 
-            if (this.transforms.removeSpecialChars) {
+            if (this.transforms.removeSpecialChars.value) {
                 result = result.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\w\s]/gi, '')
             }
 
-            if (this.transforms.replaceSpaces) {
-                result = result.replace(/\s+/g, '-')
-            }
-
-
-
-            if (this.transforms.trim) {
+            if (this.transforms.trim.value) {
                 result = result.trim();
             }
 
-            if (this.transforms.removeLeadingSpaces) {
+            if (this.transforms.removeLeadingSpaces.value) {
                 result = result.replace(/^\s+/gm, '');
             }
 
@@ -334,104 +236,102 @@ export default {
                 result = result.replace(/\t/gm, this.transforms.replaceTabCount);
             } */
 
-            if (this.transforms.removeBlankLines) {
-                //result = result.replace(/^\s*\n/gm, '');
+            if (this.transforms.removeBlankLines.value) {
                 result = result.replace(/\n\s*\n/g, "\n");
             }
 
-            if (this.transforms.multipleSpaces) {
+            if (this.transforms.multipleSpaces.value) {
                 result = result.replace(/  +/gm, ' ');
             }
 
-            if (this.transforms.multipleLines) {
+            if (this.transforms.multipleLines.value) {
                 result = result.replace(/(\r\n|\r|\n){2,}/g, "\n\n");
             }
 
-            if (this.transforms.removeLineBreaks) {
+            if (this.transforms.removeLineBreaks.value) {
                 result = result.replace(/(\r\n|\n|\r)/gm, '');
             }
 
-            if (this.transforms.removePunctuation) {
+            if (this.transforms.removePunctuation.value) {
                 result = result.replace(/[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g, "");
             }
 
-            if (this.transforms.stripEmojis) {
+            if (this.transforms.stripEmojis.value) {
                 result = result.replaceAll(/\p{Emoji}/ug, '')
             }
 
-            if (this.transforms.removeAccents) {
+            if (this.transforms.removeAccents.value) {
                 result = result.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
             }
 
-            if (this.transforms.normalizeUunicode) {
+            if (this.transforms.normalizeUnicode.value) {
                 result = result.normalize('NFKD').replace(/\\u([\d\w]{4})/gi, (match, group) => String.fromCharCode(parseInt(group, 16)));
             }
 
-            if (this.transforms.removeNonAscii) {
+            if (this.transforms.removeNonAscii.value) {
                 result = result.replace(/[^\x00-\x7F]/g, '');
             }
 
-            if (this.transforms.removeNonAlphanumeric) {
+            if (this.transforms.removeNonAlphanumeric.value) {
                 result = result.replace(/\W/gm, '');
             }
 
-            if (this.transforms.stripAllEmails) {
+            if (this.transforms.stripAllEmails.value) {
                 result = result.replace(/\S+@\S+\.\S+/gm, '');
             }
 
-            if (this.transforms.removeBbcode) {
+            if (this.transforms.removeBbcode.value) {
                 result = result.replace(/\[.*?\]/gm, '');
             }
 
-            if (this.transforms.unescapeHtml) {
+            if (this.transforms.unescapeHtml.value) {
                 result = result.replace(/\&\w+\;/g, '');
             }
 
-            if (this.transforms.stripAllHtml) {
+            if (this.transforms.stripAllHtml.value) {
                 result = result.replace(/<[^>]+>/gm, '');
             }
 
 
-            if (this.transforms.removeIds) {
+            if (this.transforms.removeIds.value) {
                 result = result.replace(/ id="[^"]*"/g, '')
             }
 
-
-            if (this.transforms.removeClasses) {
+            if (this.transforms.removeClasses.value) {
                 result = result.replace(/ class="[^"]*"/g, '')
             }
 
-            if (this.transforms.removeStyles) {
+            if (this.transforms.removeStyles.value) {
                 result = result.replace(/ style="[^"]*"/g, '')
             }
 
-            if (this.transforms.removeAllAttributes) {
+            if (this.transforms.removeAllAttributes.value) {
                 result = result.replace(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g, '');
             }
 
-            if (this.transforms.decodeHtmlEntities) {
+            if (this.transforms.decodeHtmlEntities.value) {
                 const el = document.createElement('div');
                 el.innerHTML = result;
                 result = el.textContent;
             }
 
-            if (this.transforms.decodeUrl) {
+            if (this.transforms.decodeUrl.value) {
                 result = decodeURIComponent(result)
             }
 
-            if (this.transforms.encodeUrl) {
+            if (this.transforms.encodeUrl.value) {
                 result = encodeURIComponent(result)
             }
 
-            if (this.transforms.removeUrls) {
+            if (this.transforms.removeUrls.value) {
                 result = result.replace(/https?:\/\/\S+/g, '')
             }
 
-            if (this.transforms.convertUrlsToLinks) {
+            if (this.transforms.convertUrlsToLinks.value) {
                 result = result.replace(/(https?:\/\/\S+)/g, '<a href="$1">$1</a>')
             }
 
-            if (this.transforms.commaSeparated) {
+            if (this.transforms.commaSeparated.value) {
                 result = result.split(' ').join(', ')
             }
 
