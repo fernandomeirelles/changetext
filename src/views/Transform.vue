@@ -46,11 +46,13 @@
             </div>
         </div>
 
-        <div v-for="(groupValue, groupKey) in transforms" :key="groupKey">
-            <h3 class="ml-2" :for="groupKey">{{ transforms[groupKey].label }}</h3>
-            <div v-for="(itemValue, itemKey) in groupValue.actions" :key="itemKey">
-                <input type="checkbox" :id="itemKey" v-model="itemValue.value">
-                <label class="ml-2" :for="itemKey">{{ itemValue.label }}</label>
+        <div class="flex gap-2">
+            <div v-for="(groupValue, groupKey) in transforms" :key="groupKey" class="flex w-full flex-col gap-2">
+                <h3 class="font-bold mb-2" :for="groupKey">{{ transforms[groupKey].label }}</h3>
+                <div v-for="(itemValue, itemKey) in groupValue.actions" :key="itemKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
+                    <input type="checkbox" :id="itemKey" v-model="itemValue.value" class="w-4 h-4">
+                    <label class="pl-2 w-full py-2 cursor-pointer" :for="itemKey">{{ itemValue.label }}</label>
+                </div>
             </div>
         </div>
 
