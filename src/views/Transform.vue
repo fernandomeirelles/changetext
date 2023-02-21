@@ -1,3 +1,7 @@
+<script setup>
+    import { Button } from 'flowbite-vue'
+</script>
+
 <template>
     <div class="p-4">
         <div class="mb-4">
@@ -42,14 +46,17 @@
             </div>
         </div>
 
-        <div v-for="(value, key) in transforms" :key="key">
-            <input type="checkbox" :id="key" v-model="transforms[key].value">
-            <label class="ml-2" :for="key">{{ transforms[key].label }}</label>
+        <div v-for="(groupValue, groupKey) in transforms" :key="groupKey">
+            <h3 class="ml-2" :for="groupKey">{{ transforms[groupKey].label }}</h3>
+            <div v-for="(itemValue, itemKey) in groupValue.actions" :key="itemKey">
+                <input type="checkbox" :id="itemKey" v-model="itemValue.value">
+                <label class="ml-2" :for="itemKey">{{ itemValue.label }}</label>
+            </div>
         </div>
 
         <div>
-            <button @click="transformText">Transformar</button>
-            <button @click="copyToClipboard">Copiar resultado</button>
+            <Button color="default" @click="transformText">Transformar</Button>
+            <Button color="alternative" @click="copyToClipboard">Copiar resultado</Button>
         </div>
     </div>
 </template>
@@ -60,122 +67,159 @@ export default {
             inputText: '',
             selectedFormat: 'notChange',
             transforms: {
-                reverse: {
-                    value: false,
-                    label: "Inverter"
+
+                whitespaces: {
+                    label: "whitespaces",
+                    actions: {
+                        removeLeadingSpaces: {
+                            value: false,
+                            label: "Remover espaços no início das linhas"
+                        },
+                        removeTrailingSpaces: {
+                            value: false,
+                            label: "Remover espaços no final das linhas"
+                        },
+                        removeBlankLines: {
+                            value: false,
+                            label: "Remover linhas em branco"
+                        },
+
+                        multipleSpaces: {
+                            value: false,
+                            label: "Múltiplos espaços por um espaço"
+                        },
+                        multipleLines: {
+                            value: false,
+                            label: "Múltiplas quebras de linha por uma"
+                        },
+                        removeLineBreaks: {
+                            value: false,
+                            label: "Remover quebras de linha"
+                        },
+
+                        lineBreakToSpace: {
+                            value: false,
+                            label: "Substituir quebras de linha por espaço"
+                        },
+                    }
                 },
-                commaSeparated: {
-                    value: false,
-                    label: "Separado por vírgula"
+
+                characters: {
+                    label: "characters",
+                    actions: {
+                        removeSpecialChars: {
+                            value: false,
+                            label: "Remover caracteres especiais"
+                        },
+                        trim: {
+                            value: false,
+                            label: "Remover espaços em branco"
+                        },
+                        removePunctuation: {
+                            value: false,
+                            label: "Remover pontuação"
+                        },
+                        stripEmojis: {
+                            value: false,
+                            label: "Remover emojis"
+                        },
+                        removeAccents: {
+                            value: false,
+                            label: "Remover acentos"
+                        },
+                        normalizeUnicode: {
+                            value: false,
+                            label: "Normalizar caracteres Unicode"
+                        },
+                        removeNonAscii: {
+                            value: false,
+                            label: "Remover caracteres não ASCII"
+                        },
+                        removeNonAlphanumeric: {
+                            value: false,
+                            label: "Remover caracteres não alfanuméricos"
+                        },
+                    },
                 },
-                removeSpecialChars: {
-                    value: false,
-                    label: "Remover caracteres especiais"
+
+                others: {
+                    label: "characters",
+                    actions: {
+                        reverse: {
+                            value: false,
+                            label: "Inverter"
+                        },
+                        commaSeparated: {
+                            value: false,
+                            label: "Separado por vírgula"
+                        },
+                    },
                 },
-                trim: {
-                    value: false,
-                    label: "Remover espaços em branco"
+                
+                html: {
+                    label: "html",
+                    actions: {
+                        stripAllEmails: {
+                            value: false,
+                            label: "Remover endereços de email"
+                        },
+                        removeBbcode: {
+                            value: false,
+                            label: "Remover BBCode"
+                        },
+                        unescapeHtml: {
+                            value: false,
+                            label: "Desescapar HTML"
+                        },
+                        stripAllHtml: {
+                            value: false,
+                            label: "Remover HTML"
+                        },
+                        removeIds: {
+                            value: false,
+                            label: "Remover IDs"
+                        },
+                        removeClasses: {
+                            value: false,
+                            label: "Remover classes"
+                        },
+                        removeStyles: {
+                            value: false,
+                            label: "Remover estilos"
+                        },
+                        removeAllAttributes: {
+                            value: false,
+                            label: "Remover todos os atributos"
+                        },
+                        decodeHtmlEntities: {
+                            value: false,
+                            label: "Decodificar entidades HTML"
+                        },
+                    },
                 },
-                removeLeadingSpaces: {
-                    value: false,
-                    label: "Remover espaços no início das linhas"
+
+                url: {
+                    label: "url",
+                    actions: {                   
+                        decodeUrl: {
+                            value: false,
+                            label: "Decodificar URLs"
+                        },
+                        encodeUrl: {
+                            value: false,
+                            label: "Codificar URLs"
+                        },
+                        removeUrls: {
+                            value: false,
+                            label: "Remover URLs"
+                        },
+                        convertUrlsToLinks: {
+                            value: false,
+                            label: "Converter URLs em links"
+                        },
+                    },
                 },
-                removeTrailingSpaces: {
-                    value: false,
-                    label: "Remover espaços no final das linhas"
-                },
-                removeBlankLines: {
-                    value: false,
-                    label: "Remover linhas em branco"
-                },
-                multipleSpaces: {
-                    value: false,
-                    label: "Substituir múltiplos espaços por um único espaço"
-                },
-                multipleLines: {
-                    value: false,
-                    label: "Substituir múltiplas quebras de linha por uma única quebra de linha"
-                },
-                removeLineBreaks: {
-                    value: false,
-                    label: "Remover quebras de linha"
-                },
-                removePunctuation: {
-                    value: false,
-                    label: "Remover pontuação"
-                },
-                stripEmojis: {
-                    value: false,
-                    label: "Remover emojis"
-                },
-                removeAccents: {
-                    value: false,
-                    label: "Remover acentos"
-                },
-                normalizeUnicode: {
-                    value: false,
-                    label: "Normalizar caracteres Unicode"
-                },
-                removeNonAscii: {
-                    value: false,
-                    label: "Remover caracteres não ASCII"
-                },
-                removeNonAlphanumeric: {
-                    value: false,
-                    label: "Remover caracteres não alfanuméricos"
-                },
-                stripAllEmails: {
-                    value: false,
-                    label: "Remover endereços de email"
-                },
-                removeBbcode: {
-                    value: false,
-                    label: "Remover BBCode"
-                },
-                unescapeHtml: {
-                    value: false,
-                    label: "Desescapar HTML"
-                },
-                stripAllHtml: {
-                    value: false,
-                    label: "Remover HTML"
-                },
-                removeIds: {
-                    value: false,
-                    label: "Remover IDs"
-                },
-                removeClasses: {
-                    value: false,
-                    label: "Remover classes"
-                },
-                removeStyles: {
-                    value: false,
-                    label: "Remover estilos"
-                },
-                removeAllAttributes: {
-                    value: false,
-                    label: "Remover todos os atributos"
-                },
-                decodeHtmlEntities: {
-                    value: false,
-                    label: "Decodificar entidades HTML"
-                },
-                decodeUrl: {
-                    value: false,
-                    label: "Decodificar URLs"
-                },
-                encodeUrl: {
-                    value: false,
-                    label: "Codificar URLs"
-                },
-                removeUrls: {
-                    value: false,
-                    label: "Remover URLs"
-                },
-                convertUrlsToLinks: {
-                    value: false,
-                    label: "Converter URLs em links"
-                }
+                
             },
             outputText: ''
         }
@@ -207,131 +251,126 @@ export default {
                     break
             }
 
-            if (this.transforms.reverse.value) {
+            if (this.transforms.others.actions.reverse.value) {
                 result = result.split('').reverse().join('')
             }
-
-            if (this.transforms.removeSpecialChars.value) {
+    
+            if (this.transforms.characters.actions.removeSpecialChars.value) {
                 result = result.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\w\s]/gi, '')
             }
 
-            if (this.transforms.trim.value) {
+            if (this.transforms.characters.actions.trim.value) {
                 result = result.trim();
             }
-
-            if (this.transforms.removeLeadingSpaces.value) {
+            
+            if (this.transforms.whitespaces.actions.removeLeadingSpaces.value) {
                 result = result.replace(/^\s+/gm, '');
             }
-
-            if (this.transforms.removeTrailingSpaces) {
+            
+            if (this.transforms.whitespaces.actions.removeTrailingSpaces) {
                 result = result.replace(/\s+$/gm, '');
             }
 
-            /* 
-            if (this.transforms.replaceSpace) {
-                result = result.replace(/ /gm, this.transforms.replaceSpaceCount);
-            }
-
-            if (this.transforms.replaceTab) {
-                result = result.replace(/\t/gm, this.transforms.replaceTabCount);
-            } */
-
-            if (this.transforms.removeBlankLines.value) {
+            if (this.transforms.whitespaces.actions.removeBlankLines.value) {
                 result = result.replace(/\n\s*\n/g, "\n");
             }
 
-            if (this.transforms.multipleSpaces.value) {
+            if (this.transforms.whitespaces.actions.lineBreakToSpace.value) {
+                result = result.replace(/\n\s*\n/g, " ");
+            }
+            
+            if (this.transforms.whitespaces.actions.multipleSpaces.value) {
                 result = result.replace(/  +/gm, ' ');
             }
 
-            if (this.transforms.multipleLines.value) {
+            if (this.transforms.whitespaces.actions.multipleLines.value) {
                 result = result.replace(/(\r\n|\r|\n){2,}/g, "\n\n");
             }
 
-            if (this.transforms.removeLineBreaks.value) {
+            if (this.transforms.whitespaces.actions.removeLineBreaks.value) {
                 result = result.replace(/(\r\n|\n|\r)/gm, '');
             }
 
-            if (this.transforms.removePunctuation.value) {
+            if (this.transforms.characters.actions.removePunctuation.value) {
                 result = result.replace(/[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g, "");
             }
 
-            if (this.transforms.stripEmojis.value) {
+            if (this.transforms.characters.actions.stripEmojis.value) {
                 result = result.replaceAll(/\p{Emoji}/ug, '')
             }
 
-            if (this.transforms.removeAccents.value) {
+            if (this.transforms.characters.actions.removeAccents.value) {
                 result = result.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
             }
 
-            if (this.transforms.normalizeUnicode.value) {
+            if (this.transforms.characters.actions.normalizeUnicode.value) {
                 result = result.normalize('NFKD').replace(/\\u([\d\w]{4})/gi, (match, group) => String.fromCharCode(parseInt(group, 16)));
             }
 
-            if (this.transforms.removeNonAscii.value) {
+            if (this.transforms.characters.actions.removeNonAscii.value) {
                 result = result.replace(/[^\x00-\x7F]/g, '');
             }
 
-            if (this.transforms.removeNonAlphanumeric.value) {
+            if (this.transforms.characters.actions.removeNonAlphanumeric.value) {
                 result = result.replace(/\W/gm, '');
             }
 
-            if (this.transforms.stripAllEmails.value) {
+            if (this.transforms.html.actions.stripAllEmails.value) {
                 result = result.replace(/\S+@\S+\.\S+/gm, '');
             }
 
-            if (this.transforms.removeBbcode.value) {
+            if (this.transforms.html.actions.removeBbcode.value) {
                 result = result.replace(/\[.*?\]/gm, '');
             }
 
-            if (this.transforms.unescapeHtml.value) {
+            if (this.transforms.html.actions.unescapeHtml.value) {
                 result = result.replace(/\&\w+\;/g, '');
             }
 
-            if (this.transforms.stripAllHtml.value) {
+            if (this.transforms.html.actions.stripAllHtml.value) {
                 result = result.replace(/<[^>]+>/gm, '');
             }
 
 
-            if (this.transforms.removeIds.value) {
+            if (this.transforms.html.actions.removeIds.value) {
                 result = result.replace(/ id="[^"]*"/g, '')
             }
 
-            if (this.transforms.removeClasses.value) {
+            if (this.transforms.html.actions.removeClasses.value) {
                 result = result.replace(/ class="[^"]*"/g, '')
             }
 
-            if (this.transforms.removeStyles.value) {
+            if (this.transforms.html.actions.removeStyles.value) {
                 result = result.replace(/ style="[^"]*"/g, '')
             }
 
-            if (this.transforms.removeAllAttributes.value) {
+            if (this.transforms.html.actions.removeAllAttributes.value) {
                 result = result.replace(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g, '');
             }
 
-            if (this.transforms.decodeHtmlEntities.value) {
+            if (this.transforms.html.actions.decodeHtmlEntities.value) {
                 const el = document.createElement('div');
                 el.innerHTML = result;
                 result = el.textContent;
             }
 
-            if (this.transforms.decodeUrl.value) {
+            if (this.transforms.url.actions.decodeUrl.value) {
                 result = decodeURIComponent(result)
             }
 
-            if (this.transforms.encodeUrl.value) {
+            if (this.transforms.url.actions.encodeUrl.value) {
                 result = encodeURIComponent(result)
             }
 
-            if (this.transforms.removeUrls.value) {
+            if (this.transforms.url.actions.removeUrls.value) {
                 result = result.replace(/https?:\/\/\S+/g, '')
             }
 
-            if (this.transforms.convertUrlsToLinks.value) {
+            if (this.transforms.url.actions.convertUrlsToLinks.value) {
                 result = result.replace(/(https?:\/\/\S+)/g, '<a href="$1">$1</a>')
             }
 
-            if (this.transforms.commaSeparated.value) {
+            if (this.transforms.others.actions.commaSeparated.value) {
                 result = result.split(' ').join(', ')
             }
 

@@ -1,9 +1,24 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+//import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/template/Header.vue'
+import Footer from './components/template/Footer.vue'
 </script>
 
 <template>
+  <div class="flex flex-col w-fulll max-w-none items-stretch">
+    <Header></Header>
+
+    <router-view v-slot="{Component}">
+      <transition name="fade" mode="out-in">
+        <div :key="$route.path" class="content w-full">
+          <component :is="Component" :ref="$route.path" :key="$route.fullPath"></component>
+        </div>
+      </transition>
+    </router-view>
+
+    <Footer></Footer>
+  </div>
   <!-- <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
@@ -17,7 +32,7 @@ import HelloWorld from './components/HelloWorld.vue'
     </div>
   </header> -->
 
-  <RouterView />
+  
 </template>
 
 <style scoped>
@@ -82,4 +97,15 @@ nav a:first-of-type {
     margin-top: 1rem;
   }
 }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
 </style>
