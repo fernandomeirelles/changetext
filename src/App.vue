@@ -6,7 +6,7 @@ import Footer from './components/template/Footer.vue'
 </script>
 
 <template>
-  <div class="flex flex-col w-fulll max-w-none items-stretch">
+  <div class="flex flex-col w-fulll basis-full max-w-none items-stretch">
     <Header></Header>
 
     <router-view v-slot="{Component}">

@@ -3,73 +3,87 @@
 </script>
 
 <template>
-    <div class="p-4">
-        <div class="mb-4">
-            <label class="font-bold mb-2" for="input-text">Texto de entrada:</label>
-            <textarea class="border w-full py-2 px-3 rounded" v-model="inputText" rows="10" cols="100"></textarea>
-            <label class="font-bold mb-2" for="input-text">Texto de saída:</label>
-            <textarea class="border w-full py-2 px-3 rounded" readonly v-model="outputText" rows="10" cols="100"></textarea>
-        </div>
+    <div class="flex flex-col gap-8 p-4 w-full">
         
-        <div class="mb-4">
-            <legend class="font-bold mb-2">Formatar texto:</legend>
-            <div class="mb-2">
-                <label class="inline-flex items-center">
-                    <input type="radio" class="form-radio" name="format" value="uppercase" v-model="selectedFormat">
-                    <span class="ml-2">Maiúsculas</span>
-                </label>
+        <!-- <Checkbox></Checkbox> -->
+
+        <div>
+            Text String Format: A ferramenta online Text String Format é uma solução completa para limpeza e formatação de texto gratuita, capaz de realizar diversas operações simples e complexas, como formatação de texto, remoção de quebras de linha, remoção de HTML, conversão de maiúsculas e minúsculas e busca e substituição de texto totalmente online.
+        </div>
+
+        <div class="flex gap-4">
+            <div class="flex flex-col gap">
+                <label class="font-bold mb-2" for="input-text">Texto de entrada</label>
+                <textarea class="border w-full py-2 px-3 rounded" v-model="inputText" rows="10" cols="100"></textarea>
             </div>
-            <div class="mb-2">
-                <label class="inline-flex items-center">
-                    <input type="radio" class="form-radio" name="format" value="lowercase" v-model="selectedFormat">
-                    <span class="ml-2">Minúsculas</span>
-                </label>
+            <div class="flex flex-col gap">
+                <label class="font-bold mb-2" for="input-text">Texto de saída</label>
+                <textarea class="border w-full py-2 px-3 rounded mb-2" readonly v-model="outputText" rows="10" cols="100"></textarea>
+                <Button color="default" @click="copyToClipboard">Copiar resultado</Button>
             </div>
-            <div class="mb-2">
-                <label class="inline-flex items-center">
-                    <input type="radio" class="form-radio" name="format" value="capitalizeWords" v-model="selectedFormat">
-                    <span class="ml-2">Capitalizar palavras</span>
-                </label>
-            </div>
-            <div class="mb-2">
-                <label class="inline-flex items-center">
-                    <input type="radio" class="form-radio" name="format" value="capitalizeSentences"
-                        v-model="selectedFormat">
-                    <span class="ml-2">Capitalizar sentenças</span>
-                </label>
-            </div>
-            <div class="mb-2">
-                <label class="inline-flex items-center">
-                    <input type="radio" class="form-radio" name="format" value="notChange" v-model="selectedFormat">
-                    <span class="ml-2">Do not change</span>
+        </div>
+
+        <div class="flex w-full flex-col gap-2">
+            <h3 class="font-bold mb-2">{{ formats.label }}</h3>
+            <div class="flex w-full gap-2">
+                <label v-for="(formatValue, formatKey) in formats.actions" :key="formatKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
+                    <input type="radio" :id="formatKey" :name="formatValue.label" :value="formatKey" v-model="selectedFormat" name="format" class="w-4 h-4">
+                    <span :for="formatKey" class="pl-2 w-full py-2 pr-5 cursor-pointer">{{ formatValue.label }}</span>
                 </label>
             </div>
         </div>
 
         <div class="flex gap-2">
             <div v-for="(groupValue, groupKey) in transforms" :key="groupKey" class="flex w-full flex-col gap-2">
-                <h3 class="font-bold mb-2" :for="groupKey">{{ transforms[groupKey].label }}</h3>
+                <h3 :for="groupKey" class="font-bold mb-2">{{ transforms[groupKey].label }}</h3>
                 <div v-for="(itemValue, itemKey) in groupValue.actions" :key="itemKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
                     <input type="checkbox" :id="itemKey" v-model="itemValue.value" class="w-4 h-4">
-                    <label class="pl-2 w-full py-2 cursor-pointer" :for="itemKey">{{ itemValue.label }}</label>
+                    <label :for="itemKey" class="pl-2 w-full py-2 cursor-pointer">{{ itemValue.label }}</label>
                 </div>
             </div>
         </div>
 
         <div>
             <Button color="default" @click="transformText">Transformar</Button>
-            <Button color="alternative" @click="copyToClipboard">Copiar resultado</Button>
         </div>
     </div>
 </template>
+
 <script>
+import Checkbox from '@/components/form/checkbox.vue'
 export default {
     data() {
         return {
             inputText: '',
             selectedFormat: 'notChange',
-            transforms: {
+            formats: {
+                label: "Formatar texto",
+                actions: {
+                    uppercase: {
+                        value: false,
+                        label: "Maiúsculas",
+                    },
+                    lowercase: {
+                        value: false,
+                        label: "Minúsculas",
+                    },
+                    capitalizeWords: {
+                        value: false,
+                        label: "Capitalizar palavras",
+                    },
+                    capitalizeSentences: {
+                        value: false,
+                        label: "Capitalizar sentenças",
+                    },
+                    notChange: {
+                        value: true,
+                        label: "Não formatar",
+                    },
+                },
 
+            },
+
+            transforms: {
                 whitespaces: {
                     label: "whitespaces",
                     actions: {
@@ -143,20 +157,6 @@ export default {
                         },
                     },
                 },
-
-                others: {
-                    label: "characters",
-                    actions: {
-                        reverse: {
-                            value: false,
-                            label: "Inverter"
-                        },
-                        commaSeparated: {
-                            value: false,
-                            label: "Separado por vírgula"
-                        },
-                    },
-                },
                 
                 html: {
                     label: "html",
@@ -219,6 +219,24 @@ export default {
                             value: false,
                             label: "Converter URLs em links"
                         },
+                    },
+                },
+
+                others: {
+                    label: "others",
+                    actions: {
+                        reverse: {
+                            value: false,
+                            label: "Inverter"
+                        },
+                        commaSeparated: {
+                            value: false,
+                            label: "Separar por vírgula"
+                        },
+                        slug: {
+                            value: false,
+                            label: "Trasnformar em slug"
+                        }
                     },
                 },
                 
@@ -374,6 +392,18 @@ export default {
 
             if (this.transforms.others.actions.commaSeparated.value) {
                 result = result.split(' ').join(', ')
+            }
+
+            if(this.transforms.others.actions.slug.value) {
+                result = result.toString()
+                    .toLowerCase()
+                    .normalize('NFD') // remover acentos
+                    .replace(/[\u0300-\u036f]/g, '') // remover caracteres especiais
+                    .replace(/\s+/g, '-') // substituir espaços em branco por "-"
+                    .replace(/[^\w\-]+/g, '') // remover caracteres não alfanuméricos
+                    .replace(/\-\-+/g, '-') // remover hífens duplicados
+                    .replace(/^-+/, '') // remover hífens no início
+                    .replace(/-+$/, ''); // remover hífens no final
             }
 
             this.outputText = result
