@@ -1,7 +1,7 @@
 <template>
   <div>
-    <textarea v-model="inputText"></textarea>
-    <textarea :value="formattedText" disabled></textarea>
+    <!-- <textarea v-model="inputText"></textarea> -->
+    <input type="hidden" :value="formattedText" disabled/>
 
     <div v-for="(substitution, index) in substitutions" :key="index">
       <div>
@@ -16,19 +16,27 @@
 
 <script>
 export default {
+  props: {
+    value: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
-      inputText: "",
+      inputText: '',
       substitutions: [{ searchTerm: "", replaceTerm: "" }],
     };
   },
   computed: {
     formattedText() {
-      let formatted = this.inputText;
+      let formatted = this.value;
       this.substitutions.forEach((substitution) => {
         const regex = new RegExp(substitution.searchTerm, "gi");
         formatted = formatted.replace(regex, substitution.replaceTerm);
       });
+
+      this.emitFormattedText(formatted);
       return formatted;
     },
   },
@@ -39,6 +47,9 @@ export default {
     removeSubstitution(index) {
       this.substitutions.splice(index, 1);
     },
+    emitFormattedText(data) {
+      this.$emit("replacedText", data);
+    }
   },
 };
 </script>

@@ -1,14 +1,13 @@
 <script setup>
     import { Button } from 'flowbite-vue'
+    import ReplaceText from '@/components/form/ReplaceText.vue'
 </script>
 
 <template>
     <div class="flex flex-col gap-8 p-4 w-full">
-        
-        <!-- <Checkbox></Checkbox> -->
 
         <div>
-            Text String Format: A ferramenta online Text String Format é uma solução completa para limpeza e formatação de texto gratuita, capaz de realizar diversas operações simples e complexas, como formatação de texto, remoção de quebras de linha, remoção de HTML, conversão de maiúsculas e minúsculas e busca e substituição de texto totalmente online.
+            Text String Format: A ferramenta é uma solução completa para limpeza e formatação de texto gratuita, capaz de realizar diversas operações simples e complexas, como formatação de texto, remoção de quebras de linha, remoção de HTML, conversão de maiúsculas e minúsculas e busca e substituição de texto totalmente online.
         </div>
 
         <div class="flex gap-4">
@@ -19,9 +18,11 @@
             <div class="flex flex-col gap">
                 <label class="font-bold mb-2" for="input-text">Texto de saída</label>
                 <textarea class="border w-full py-2 px-3 rounded mb-2" readonly v-model="outputText" rows="10" cols="100"></textarea>
-                <Button color="default" @click="copyToClipboard">Copiar resultado</Button>
+                <Button color="alternative" @click="copyToClipboard">Copiar resultado</Button>
             </div>
         </div>
+
+        <ReplaceText :value="inputText" @replacedText="getReplacedText"></ReplaceText>
 
         <div class="flex w-full flex-col gap-2">
             <h3 class="font-bold mb-2">{{ formats.label }}</h3>
@@ -43,15 +44,18 @@
             </div>
         </div>
 
-        <div>
+        <div class="flex gap-4 sticky bottom-0 bg-white py-4" style="box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);">
             <Button color="default" @click="transformText">Transformar</Button>
+            <Button color="alternative" @click="copyToClipboard">Copiar resultado</Button>
         </div>
     </div>
 </template>
 
 <script>
-import Checkbox from '@/components/form/checkbox.vue'
 export default {
+    components: {
+        ReplaceText,
+    },
     data() {
         return {
             inputText: '',
@@ -241,12 +245,21 @@ export default {
                 },
                 
             },
-            outputText: ''
+            outputText: '',
+            replacedText: '',
         }
     },
     methods: {
+        getReplacedText(dados) {
+            this.replacedText = dados;
+            return dados;
+        },
         transformText() {
             let result = this.inputText
+
+            if(this.replacedText) {
+                result = this.replacedText;
+            }
 
             switch (this.selectedFormat) {
                 case 'uppercase':
