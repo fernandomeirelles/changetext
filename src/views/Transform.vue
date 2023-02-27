@@ -22,8 +22,6 @@
             </div>
         </div>
 
-        <ReplaceText :value="inputText" @replacedText="getReplacedText"></ReplaceText>
-
         <div class="flex w-full flex-col gap-2">
             <h3 class="font-bold mb-2">{{ formats.label }}</h3>
             <div class="flex w-full gap-2">
@@ -44,6 +42,13 @@
             </div>
         </div>
 
+        <div class="flex w-full flex-col gap-2">
+            <h3 class="font-bold mb-2">{{ replace.label }}</h3>
+            <div class="flex flex-col w-full gap-2">
+                <ReplaceText :value="inputText" @replacedText="getReplacedText"></ReplaceText>
+            </div>
+        </div>
+
         <div class="flex gap-4 sticky bottom-0 bg-white py-4" style="box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);">
             <Button color="default" @click="transformText">Transformar</Button>
             <Button color="alternative" @click="copyToClipboard">Copiar resultado</Button>
@@ -60,6 +65,9 @@ export default {
         return {
             inputText: '',
             selectedFormat: 'notChange',
+            replace: {
+                label: "Substituir texto"
+            },
             formats: {
                 label: "Formatar texto",
                 actions: {
@@ -91,6 +99,10 @@ export default {
                 whitespaces: {
                     label: "whitespaces",
                     actions: {
+                        trim: {
+                            value: false,
+                            label: "Remover espaços no início e final das linhas"
+                        },
                         removeLeadingSpaces: {
                             value: false,
                             label: "Remover espaços no início das linhas"
@@ -130,10 +142,6 @@ export default {
                         removeSpecialChars: {
                             value: false,
                             label: "Remover caracteres especiais"
-                        },
-                        trim: {
-                            value: false,
-                            label: "Remover espaços em branco"
                         },
                         removePunctuation: {
                             value: false,
@@ -292,7 +300,7 @@ export default {
                 result = result.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\w\s]/gi, '')
             }
 
-            if (this.transforms.characters.actions.trim.value) {
+            if (this.transforms.whitespaces.actions.trim.value) {
                 result = result.trim();
             }
             
@@ -300,7 +308,7 @@ export default {
                 result = result.replace(/^\s+/gm, '');
             }
             
-            if (this.transforms.whitespaces.actions.removeTrailingSpaces) {
+            if (this.transforms.whitespaces.actions.removeTrailingSpaces.value) {
                 result = result.replace(/\s+$/gm, '');
             }
 
