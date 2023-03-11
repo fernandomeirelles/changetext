@@ -7,16 +7,16 @@
     <div class="flex flex-col gap-8 p-4 w-full">
 
         <div>
-            Text String Format: A ferramenta é uma solução completa para limpeza e formatação de texto gratuita, capaz de realizar diversas operações simples e complexas, como formatação de texto, remoção de quebras de linha, remoção de HTML, conversão de maiúsculas e minúsculas e busca e substituição de texto totalmente online.
+            Text String Format: Solução completa para limpeza e formatação de texto, capaz de realizar diversas operações simples e complexas, como formatação de texto, remoção de quebras de linha, remoção de HTML, conversão de maiúsculas e minúsculas e busca, substituição de texto e muito mais, totalmente online.
         </div>
 
         <div class="flex gap-4">
             <div class="flex flex-col gap">
-                <label class="font-bold mb-2" for="input-text">Texto de entrada</label>
+                <label class="font-bold mb-2" for="input-text">{{ $t('message.inputTextArea.label') }}</label>
                 <textarea class="border w-full py-2 px-3 rounded" v-model="inputText" rows="10" cols="100"></textarea>
             </div>
             <div class="flex flex-col gap">
-                <label class="font-bold mb-2" for="input-text">Texto de saída</label>
+                <label class="font-bold mb-2" for="input-text">{{ $t('message.outputTextArea.label') }}</label>
                 <textarea class="border w-full py-2 px-3 rounded mb-2" readonly v-model="outputText" rows="10" cols="100"></textarea>
                 <Button color="alternative" @click="copyToClipboard">Copiar resultado</Button>
             </div>
@@ -248,7 +248,15 @@ export default {
                         slug: {
                             value: false,
                             label: "Trasnformar em slug"
-                        }
+                        },
+                        strikethrough: {
+                            value: false,
+                            label: "Tachado"
+                        },
+                        upsideDown: {
+                            value: false,
+                            label: "Cabeça para baixo"
+                        },
                     },
                 },
                 
@@ -427,6 +435,31 @@ export default {
                     .replace(/-+$/, ''); // remover hífens no final
             }
 
+            if (this.transforms.others.actions.strikethrough.value) {
+                const input = this.inputText;
+                const output = result.split('').map(char => {
+                    if (char === ' ') {
+                        return char;
+                    }
+                    return `${char}̶`;
+                }).join('');
+                    
+                result = output;
+            }
+
+            if (this.transforms.others.actions.upsideDown.value) {
+                const upsideDownChars = {'a': '\u0250', 'b': 'q', 'c': '\u0254', 'd': 'p', 'e': '\u01DD', 'f': '\u025F', 'g': '\u0183', 'h': '\u0265', 'i': '\u0131', 'j': '\u027E', 'k': '\u029E', 'l': '\u05DF', 'm': '\u026F', 'n': 'u', 'o': 'o', 'p': 'd', 'q': 'b', 'r': '\u0279', 's': 's', 't': '\u0287', 'u': 'n', 'v': '\u028C', 'w': '\u028D', 'x': 'x', 'y': '\u028E', 'z': 'z', 'A': '\u2200', 'B': 'B', 'C': '\u0186', 'D': '\u15E1', 'E': '\u018E', 'F': '\u2132', 'G': '\u2141', 'H': 'H', 'I': 'I', 'J': '\u017F', 'K': 'K', 'L': '\u02E5', 'M': 'W', 'N': 'N', 'O': 'O', 'P': '\u0500', 'Q': 'Q', 'R': 'R', 'S': 'S', 'T': '\u2534', 'U': '\u2229', 'V': '\u039B', 'W': 'M', 'X': 'X', 'Y': '\u2144', 'Z': 'Z', '0': '0', '1': 'Ɩ', '2': 'ᄅ', '3': 'Ɛ', '4': 'ㄣ', '5': 'ϛ', '6': '9', '7': 'ㄥ', '8': '8', '9': '6', '!': '¡', '(': ')', ')': '(', ',': '\'', '.': '˙', ';': '\u061B', '<': '>', '>': '<', '?': '\u00BF', '[': ']', ']': '[', '_': '\u203E', '{': '}', '}': '{', '¡': '!', '?': '¿',};
+                let output = '';
+                for (let i = result.length - 1; i >= 0; i--) {
+                    const char = result.charAt(i);
+                    const upsideDownChar = upsideDownChars[char];
+                    output += upsideDownChar != undefined ? upsideDownChar : char;
+
+                    console.log(output)
+                }
+                result = output;
+            }
+                
             this.outputText = result
         },
         copyToClipboard() {
