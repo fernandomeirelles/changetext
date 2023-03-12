@@ -5,7 +5,6 @@ import { createI18n } from 'vue-i18n'
 import App from './App.vue'
 import router from './router'
 
-//import 'tailwindcss/dist/tailwind.css'
 import './assets/main.css'
 
 const messages = {
@@ -46,10 +45,8 @@ function getBrowserLocale() {
   const navigatorLocale =
   navigator.languages !== undefined
     ? navigator.languages[0]
-    : navigator.language;
-  
+    : navigator.language;  
   const normalizedLocale = navigatorLocale.toLowerCase()
-  
   return normalizedLocale
 }
 

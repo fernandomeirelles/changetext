@@ -49,6 +49,16 @@
             </div>
         </div>
 
+        <div class="flex w-full flex-col gap-2">
+            <h3 class="font-bold mb-2">{{ specialTransform.label }}</h3>
+            <div class="flex w-full gap-2">
+                <label v-for="(specialValue, specialKey) in specialTransform.actions" :key="specialKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
+                    <input type="radio" :id="specialKey" :name="specialValue.label" :value="specialKey" v-model="selectedSpecialFormat" name="specialTransform" class="w-4 h-4">
+                    <span :for="specialKey" class="pl-2 w-full py-2 pr-5 cursor-pointer">{{ specialValue.label }}</span>
+                </label>
+            </div>
+        </div>
+
         <div class="flex gap-4 sticky bottom-0 bg-white py-4" style="box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);">
             <Button color="default" @click="transformText">Transformar</Button>
             <Button color="alternative" @click="copyToClipboard">Copiar resultado</Button>
@@ -65,12 +75,17 @@ export default {
         return {
             inputText: '',
             selectedFormat: 'notChange',
+            selectedSpecialFormat: 'notChangeSpecial',
             replace: {
                 label: "Substituir texto"
             },
             formats: {
                 label: "Formatar texto",
                 actions: {
+                    notChange: {
+                        value: true,
+                        label: "Não formatar",
+                    },
                     uppercase: {
                         value: false,
                         label: "Maiúsculas",
@@ -86,10 +101,6 @@ export default {
                     capitalizeSentences: {
                         value: false,
                         label: "Capitalizar sentenças",
-                    },
-                    notChange: {
-                        value: true,
-                        label: "Não formatar",
                     },
                 },
 
@@ -253,13 +264,40 @@ export default {
                             value: false,
                             label: "Tachado"
                         },
-                        upsideDown: {
-                            value: false,
-                            label: "Cabeça para baixo"
-                        },
                     },
                 },
                 
+            },
+
+            specialTransform: {
+                label: "Especial",
+                actions: {
+                    notChangeSpecial: {
+                        value: true,
+                        label: "Não formatar "
+                    },
+                    upsideDown: {
+                        value: false,
+                        label: "Cabeça para baixo"
+                    },
+                    morseCode: {
+                        value: false,
+                        label: "Texto para código morse"
+                    },
+                    morseToText: {
+                        value: false,
+                        label: "Código morse para texto"
+                    },
+                    binaryCode: {
+                        value: false,
+                        label: "Texto para código binário"
+                    },
+                    binaryCodeToText: {
+                      value: false,
+                      label: "Códdigo binário para texto"  
+                    },
+                },
+
             },
             outputText: '',
             replacedText: '',
@@ -275,6 +313,45 @@ export default {
 
             if(this.replacedText) {
                 result = this.replacedText;
+            }
+
+            switch (this.selectedSpecialFormat) {
+                case 'morseCode':
+                    const morseChars = { 'a': '.-', 'b': '-...', 'c': '-.-.', 'd': '-..', 'e': '.', 'f': '..-.', 'g': '--.', 'h': '....', 'i': '..', 'j': '.---', 'k': '-.-', 'l': '.-..', 'm': '--', 'n': '-.', 'o': '---', 'p': '.--.', 'q': '--.-', 'r': '.-.', 's': '...', 't': '-', 'u': '..-', 'v': '...-', 'w': '.--', 'x': '-..-', 'y': '-.--', 'z': '--..', '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', '.': '.-.-.-', ',': '--..--', '?': '..--..', "'": '.----.', '!': '-.-.--', '/': '-..-.', '(': '-.--.', ')': '-.--.-', '&': '.-...', ':': '---...', ';': '-.-.-.', '=': '-...-', '+': '.-.-.', '-': '-....-', '_': '..--.-', '"': '.-..-.', '$': '...-..-', '@': '.--.-.', ' ': '/', };
+                    result = result.toLowerCase().split('').map(c => morseChars[c]).join(' ');
+                    break
+
+                case 'morseToText':
+                    const morseToChar = { '.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E', '..-.': 'F', '--.': 'G', '....': 'H', '..': 'I', '.---': 'J', '-.-': 'K', '.-..': 'L', '--': 'M', '-.': 'N', '---': 'O', '.--.': 'P', '--.-': 'Q', '.-.': 'R', '...': 'S', '-': 'T', '..-': 'U', '...-': 'V', '.--': 'W', '-..-': 'X', '-.--': 'Y', '--..': 'Z', '-----': '0', '.----': '1', '..---': '2', '...--': '3', '....-': '4', '.....': '5', '-....': '6', '--...': '7', '---..': '8', '----.': '9', };
+                    const morseWords = result.split(' / ');
+                    const textWords = morseWords.map(morseWord => morseWord.split(' ').map(morseLetter => morseToChar[morseLetter]).join('')).join(' ');
+                    result = textWords;
+                    break
+                
+                case 'upsideDown':
+                    const upsideDownChars = {'a': '\u0250', 'b': 'q', 'c': '\u0254', 'd': 'p', 'e': '\u01DD', 'f': '\u025F', 'g': '\u0183', 'h': '\u0265', 'i': '\u0131', 'j': '\u027E', 'k': '\u029E', 'l': '\u05DF', 'm': '\u026F', 'n': 'u', 'o': 'o', 'p': 'd', 'q': 'b', 'r': '\u0279', 's': 's', 't': '\u0287', 'u': 'n', 'v': '\u028C', 'w': '\u028D', 'x': 'x', 'y': '\u028E', 'z': 'z', 'A': '\u2200', 'B': 'B', 'C': '\u0186', 'D': '\u15E1', 'E': '\u018E', 'F': '\u2132', 'G': '\u2141', 'H': 'H', 'I': 'I', 'J': '\u017F', 'K': 'K', 'L': '\u02E5', 'M': 'W', 'N': 'N', 'O': 'O', 'P': '\u0500', 'Q': 'Q', 'R': 'R', 'S': 'S', 'T': '\u2534', 'U': '\u2229', 'V': '\u039B', 'W': 'M', 'X': 'X', 'Y': '\u2144', 'Z': 'Z', '0': '0', '1': 'Ɩ', '2': 'ᄅ', '3': 'Ɛ', '4': 'ㄣ', '5': 'ϛ', '6': '9', '7': 'ㄥ', '8': '8', '9': '6', '!': '¡', '(': ')', ')': '(', ',': '\'', '.': '˙', ';': '\u061B', '<': '>', '>': '<', '?': '\u00BF', '[': ']', ']': '[', '_': '\u203E', '{': '}', '}': '{', '¡': '!', '?': '¿',};
+                    let output = '';
+                    for (let i = result.length - 1; i >= 0; i--) {
+                        const char = result.charAt(i);
+                        const upsideDownChar = upsideDownChars[char];
+                        output += upsideDownChar != undefined ? upsideDownChar : char;
+                    }
+                    result = output;
+                    break
+
+                case 'binaryCode':
+                    result = [...result].map(c => c.charCodeAt(0).toString(2)).join(" ");
+                    break
+
+                case 'binaryCodeToText':
+                    const binaryArray = result.split(' '); // dividindo a string binária em um array
+                    const characterArray = binaryArray.map(binary => String.fromCharCode(parseInt(binary, 2))); // convertendo cada binário para seu respectivo caracter
+                    result = characterArray.join('');
+                    break
+
+                case 'notChangeSpecial':
+                    //result = result;
+                    break
             }
 
             switch (this.selectedFormat) {
@@ -296,7 +373,7 @@ export default {
                     break
 
                 case 'notChange':
-                    result = result;
+                    //result = result;
                     break
             }
 
@@ -445,20 +522,7 @@ export default {
                 }).join('');
                     
                 result = output;
-            }
-
-            if (this.transforms.others.actions.upsideDown.value) {
-                const upsideDownChars = {'a': '\u0250', 'b': 'q', 'c': '\u0254', 'd': 'p', 'e': '\u01DD', 'f': '\u025F', 'g': '\u0183', 'h': '\u0265', 'i': '\u0131', 'j': '\u027E', 'k': '\u029E', 'l': '\u05DF', 'm': '\u026F', 'n': 'u', 'o': 'o', 'p': 'd', 'q': 'b', 'r': '\u0279', 's': 's', 't': '\u0287', 'u': 'n', 'v': '\u028C', 'w': '\u028D', 'x': 'x', 'y': '\u028E', 'z': 'z', 'A': '\u2200', 'B': 'B', 'C': '\u0186', 'D': '\u15E1', 'E': '\u018E', 'F': '\u2132', 'G': '\u2141', 'H': 'H', 'I': 'I', 'J': '\u017F', 'K': 'K', 'L': '\u02E5', 'M': 'W', 'N': 'N', 'O': 'O', 'P': '\u0500', 'Q': 'Q', 'R': 'R', 'S': 'S', 'T': '\u2534', 'U': '\u2229', 'V': '\u039B', 'W': 'M', 'X': 'X', 'Y': '\u2144', 'Z': 'Z', '0': '0', '1': 'Ɩ', '2': 'ᄅ', '3': 'Ɛ', '4': 'ㄣ', '5': 'ϛ', '6': '9', '7': 'ㄥ', '8': '8', '9': '6', '!': '¡', '(': ')', ')': '(', ',': '\'', '.': '˙', ';': '\u061B', '<': '>', '>': '<', '?': '\u00BF', '[': ']', ']': '[', '_': '\u203E', '{': '}', '}': '{', '¡': '!', '?': '¿',};
-                let output = '';
-                for (let i = result.length - 1; i >= 0; i--) {
-                    const char = result.charAt(i);
-                    const upsideDownChar = upsideDownChars[char];
-                    output += upsideDownChar != undefined ? upsideDownChar : char;
-
-                    console.log(output)
-                }
-                result = output;
-            }
+            }            
                 
             this.outputText = result
         },
