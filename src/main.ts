@@ -10,18 +10,18 @@ import './assets/main.css'
 const messages = {
   'en': {
     message: {
-      hello: 'hello world',
+      copyright: "All rights reserved.",
       inputTextArea: {
-        label: "Texto de entrada"
+        label: "Input text"
       },
       outputTextArea: {
-        label: "Texto de saída"
-      }
+        label: "Output"
+      },
     }
   },
   'pt-br': {
     message: {
-      hello: 'Olá mundo',
+      copyright: "Todos os direitos reservados.",
       textFormat: {
 
       },
@@ -30,7 +30,7 @@ const messages = {
       },
       outputTextArea: {
         label: "Texto de saída"
-      }
+      },
     }
   }
 }
@@ -52,8 +52,8 @@ function getBrowserLocale() {
 
 
 const app = createApp(App)
-  .use(i18n)
   .use(createPinia())
   .use(router)
+  .use(i18n)
 
 app.mount('#app')
