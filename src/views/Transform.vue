@@ -4,27 +4,26 @@
 </script>
 
 <template>
-    <div class="flex flex-col gap-8 p-4 w-full">
-
+    <div class="flex flex-col gap-8 w-full">
         <div>
             Text String Format: Solução completa para limpeza e formatação de texto, capaz de realizar diversas operações simples e complexas, como formatação de texto, remoção de quebras de linha, remoção de HTML, conversão de maiúsculas e minúsculas e busca, substituição de texto e muito mais, totalmente online.
         </div>
 
-        <div class="flex gap-4">
+        <div class="flex flex-col sm:flex-row gap-4">
             <div class="flex flex-col gap">
                 <label class="font-bold mb-2" for="input-text">{{ $t('message.inputTextArea.label') }}</label>
                 <textarea class="border w-full py-2 px-3 rounded" v-model="inputText" rows="10" cols="100"></textarea>
             </div>
             <div class="flex flex-col gap">
                 <label class="font-bold mb-2" for="input-text">{{ $t('message.outputTextArea.label') }}</label>
-                <textarea class="border w-full py-2 px-3 rounded mb-2" readonly v-model="outputText" rows="10" cols="100"></textarea>
+                <textarea class="bg-stone-100 border w-full py-2 px-3 rounded mb-2" readonly v-model="outputText" rows="10" cols="100"></textarea>
                 <Button color="alternative" @click="copyToClipboard">Copiar resultado</Button>
             </div>
         </div>
 
         <div class="flex w-full flex-col gap-2">
             <h3 class="font-bold mb-2">{{ formats.label }}</h3>
-            <div class="flex w-full gap-2">
+            <div class="flex flex-wrap w-full gap-2">
                 <label v-for="(formatValue, formatKey) in formats.actions" :key="formatKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
                     <input type="radio" :id="formatKey" :name="formatValue.label" :value="formatKey" v-model="selectedFormat" name="format" class="w-4 h-4">
                     <span :for="formatKey" class="pl-2 w-full py-2 pr-5 cursor-pointer">{{ formatValue.label }}</span>
@@ -32,7 +31,7 @@
             </div>
         </div>
 
-        <div class="flex gap-2">
+        <div class="flex lg:flex-nowrap flex-wrap gap-2">
             <div v-for="(groupValue, groupKey) in transforms" :key="groupKey" class="flex w-full flex-col gap-2">
                 <h3 :for="groupKey" class="font-bold mb-2">{{ transforms[groupKey].label }}</h3>
                 <div v-for="(itemValue, itemKey) in groupValue.actions" :key="itemKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
@@ -51,7 +50,7 @@
 
         <div class="flex w-full flex-col gap-2">
             <h3 class="font-bold mb-2">{{ specialTransform.label }}</h3>
-            <div class="flex w-full gap-2">
+            <div class="flex flex-wrap w-full gap-2">
                 <label v-for="(specialValue, specialKey) in specialTransform.actions" :key="specialKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
                     <input type="radio" :id="specialKey" :name="specialValue.label" :value="specialKey" v-model="selectedSpecialFormat" name="specialTransform" class="w-4 h-4">
                     <span :for="specialKey" class="pl-2 w-full py-2 pr-5 cursor-pointer">{{ specialValue.label }}</span>
@@ -59,7 +58,7 @@
             </div>
         </div>
 
-        <div class="flex gap-4 sticky bottom-0 bg-white py-4" style="box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);">
+        <div class="flex gap-4 sticky bottom-0 bg-white py-4 border-t-2 border-gray-100">
             <Button color="default" @click="transformText">Transformar</Button>
             <Button color="alternative" @click="copyToClipboard">Copiar resultado</Button>
         </div>

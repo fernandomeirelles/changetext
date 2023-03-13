@@ -2,7 +2,7 @@
     <!-- <textarea v-model="inputText"></textarea> -->
     <input type="hidden" :value="formattedText" disabled/>
 
-    <div v-for="(substitution, index) in substitutions" :key="index" class="flex items-center gap-4 w-full">
+    <div v-for="(substitution, index) in substitutions" :key="index" class="flex items-center gap-2 sm:gap-4 w-full">
         <input type="text" v-model="substitution.searchTerm" placeholder="Localizar" class="w-full">
         <ArrowRightIcon class="h-6 w-6 flex-shrink-0 text-black-600" aria-hidden="true"/>
         <input type="text" v-model="substitution.replaceTerm" placeholder="Substituir" class="w-full">
