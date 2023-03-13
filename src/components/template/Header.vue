@@ -5,7 +5,8 @@
         <div class="flex justify-start lg:w-0 lg:flex-1">
           <a href="#">
             <span class="sr-only">Your Company</span>
-            <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+            <!-- <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" /> -->
+            <Logo class="h-9 w-auto "></Logo>
           </a>
         </div>
         <!-- <div class="-my-2 -mr-2 md:hidden">
@@ -164,9 +165,10 @@ import {
   Squares2X2Icon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
-//import TranslateIcon from './../icons/IconTranslate.vue'
+import Logo from './../template/Logo.vue'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import Select from './../../components/form/Select.vue'
+
 
 const solutions = [
   {
