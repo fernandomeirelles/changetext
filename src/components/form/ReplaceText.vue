@@ -1,5 +1,4 @@
 <template>
-    <!-- <textarea v-model="inputText"></textarea> -->
     <input type="hidden" :value="formattedText" disabled/>
 
     <div v-for="(substitution, index) in substitutions" :key="index" class="flex items-center gap-2 sm:gap-4 w-full">
