@@ -1,9 +1,10 @@
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import { createI18n } from 'vue-i18n'
-
 import App from './App.vue'
 import router from './router'
+
+import { createPinia } from 'pinia'
+import { createI18n } from 'vue-i18n'
+import { createMetaManager } from 'vue-meta'
 
 import './assets/main.css'
 
@@ -55,5 +56,6 @@ const app = createApp(App)
   .use(createPinia())
   .use(router)
   .use(i18n)
-
+  .use(createMetaManager())
+await router.isReady()
 app.mount('#app')

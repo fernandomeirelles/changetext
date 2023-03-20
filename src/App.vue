@@ -1,12 +1,47 @@
-<script setup lang="ts">
+<script lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import Header from './components/template/Header.vue'
-import Footer from './components/template/Footer.vue'
+import { useMeta } from 'vue-meta'
+
+export default {
+  setup () {
+    const title = 'Change Text'
+    const subTitle = 'Solução completa para limpeza e formatação de texto'
+    const description = 'Melhore a formatação e limpeza do seu texto com a solução completa online e gratuita do Change Text. Realize operações simples e complexas, incluindo remoção de quebras de linha, caracteres e formatações, além de busca e substituição de texto. Experimente agora!'
+    useMeta({
+      title: title +' - '+ subTitle,
+      description: description,
+      metaTitle: title,
+      author: "Fernando Meirelles",
+      keywords: "Change Text, formatação de texto, limpeza de texto, operações de texto, busca e substituição de texto",
+      og: {
+        "site_name": title,
+        title: title,
+        description: description,
+        type: 'website',
+        image: '/src/assets/meta-image.jpg',
+        "image:type": 'image/jpeg',
+        "image:width": '1200',
+        "image:height": '630',
+      },
+      twitter: {
+        title: title,
+        description: description,
+        image: '/src/assets/meta-image.jpg',
+      },
+        htmlAttrs: { lang: 'en', amp: true }
+      },
+    )
+  }
+}
 </script>
 
 <template>
+  <metainfo>
+      <template v-slot:title="{ content }">{{content}}</template>
+      <template v-slot:og(description)="{ content, metainfo }">{{ content || metainfo.description }}</template>
+      <template v-slot:twitter(description)="{ content, metainfo }">{{ content || metainfo.description }}</template>
+  </metainfo>
   <div class="flex flex-col w-fulll basis-full max-w-none items-stretch">
-    <Header></Header>
 
     <router-view v-slot="{Component}">
       <transition name="fade" mode="out-in">
@@ -16,7 +51,6 @@ import Footer from './components/template/Footer.vue'
       </transition>
     </router-view>
 
-    <Footer></Footer>
   </div>
 </template>
 

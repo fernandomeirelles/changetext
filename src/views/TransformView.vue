@@ -1,9 +1,13 @@
 <script setup>
     import { Button } from 'flowbite-vue'
     import ReplaceText from '@/components/form/ReplaceText.vue'
+    import Header from '../components/template/Header.vue'
+    import Footer  from '../components/template/Footer.vue'
 </script>
 
 <template>
+    <Header></Header>
+
     <div class="flex flex-col gap-8 w-full">
         <div>
             Text String Format: Solução completa para limpeza e formatação de texto, capaz de realizar diversas operações simples e complexas, como formatação de texto, remoção de quebras de linha, remoção de HTML, conversão de maiúsculas e minúsculas e busca, substituição de texto e muito mais, totalmente online.
@@ -63,6 +67,8 @@
             <Button color="alternative" @click="copyToClipboard">Copiar resultado</Button>
         </div>
     </div>
+
+    <Footer></Footer>
 </template>
 
 <script>
