@@ -6,7 +6,7 @@ export default {
   setup () {
     const title = 'Change Text'
     const subTitle = 'Solução completa para limpeza e formatação de texto'
-    const description = 'Melhore a formatação e limpeza do seu texto com a solução completa online e gratuita do Change Text. Realize operações simples e complexas, incluindo remoção de quebras de linha, caracteres e formatações, além de busca e substituição de texto. Experimente agora!'
+    const description = 'Melhore a formatação e limpeza do seu texto com a solução completa online e gratuita do Change Text. Realize operações simples e complexas, incluindo remoção de quebras de linha, caracteres e formatações, além de busca e substituição de texto. Experimente agora!!'
     useMeta({
       title: title +' - '+ subTitle,
       description: description,
