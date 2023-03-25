@@ -18,7 +18,7 @@ export default {
         title: title,
         description: description,
         type: 'website',
-        image: '/meta-image.jpg',
+        image: '/changetext/meta-image.jpg',
         "image:type": 'image/jpeg',
         "image:width": '1200',
         "image:height": '630',
@@ -26,7 +26,7 @@ export default {
       twitter: {
         title: title,
         description: description,
-        image: '/meta-image.jpg',
+        image: '/changetext/meta-image.jpg',
       },
         htmlAttrs: { lang: 'en', amp: true }
       },
