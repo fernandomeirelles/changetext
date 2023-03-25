@@ -59,10 +59,9 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
   import {
     Listbox,
-    ListboxLabel,
+    //ListboxLabel,
     ListboxButton,
     ListboxOptions,
     ListboxOption,

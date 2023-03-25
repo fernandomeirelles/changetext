@@ -21,7 +21,7 @@
             <div class="flex flex-col gap">
                 <label class="font-bold mb-2" for="input-text">{{ $t('message.outputTextArea.label') }}</label>
                 <textarea class="bg-stone-100 border w-full py-2 px-3 rounded mb-2" readonly v-model="outputText" rows="10" cols="100"></textarea>
-                <Button color="alternative" @click="copyToClipboard">Copiar resultado</Button>
+                <Button color="alternative" @click="copyToClipboard">{{ $t('message.outputTextArea.copyResult') }}</Button>
             </div>
         </div>
 
@@ -85,27 +85,27 @@ export default {
                 label: "Substituir texto"
             },
             formats: {
-                label: "Formatar texto",
+                label: this.$t('message.formats.label'),
                 actions: {
                     notChange: {
                         value: true,
-                        label: "Não formatar",
+                        label: this.$t('message.formats.actions.notChange'),
                     },
                     uppercase: {
                         value: false,
-                        label: "Maiúsculas",
+                        label: this.$t('message.formats.actions.uppercase'),
                     },
                     lowercase: {
                         value: false,
-                        label: "Minúsculas",
+                        label: this.$t('message.formats.actions.lowercase'),
                     },
                     capitalizeWords: {
                         value: false,
-                        label: "Capitalizar palavras",
+                        label: this.$t('message.formats.actions.capitalizeWords'),
                     },
                     capitalizeSentences: {
                         value: false,
-                        label: "Capitalizar sentenças",
+                        label: this.$t('message.formats.actions.capitalizeSentences'),
                     },
                 },
 
