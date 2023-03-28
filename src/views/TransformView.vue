@@ -113,41 +113,39 @@ export default {
 
             transforms: {
                 whitespaces: {
-                    label: "whitespaces",
+                    label: this.$t('message.transforms.whitespaces.label'),
                     actions: {
                         trim: {
                             value: false,
-                            label: "Remover espaços no início e final das linhas"
+                            label: this.$t('message.transforms.whitespaces.actions.trim'),
                         },
                         removeLeadingSpaces: {
                             value: false,
-                            label: "Remover espaços no início das linhas"
+                            label: this.$t('message.transforms.whitespaces.actions.removeLeadingSpaces'),
                         },
                         removeTrailingSpaces: {
                             value: false,
-                            label: "Remover espaços no final das linhas"
+                            label: this.$t('message.transforms.whitespaces.actions.removeTrailingSpaces'),
                         },
                         removeBlankLines: {
                             value: false,
-                            label: "Remover linhas em branco"
+                            label: this.$t('message.transforms.whitespaces.actions.removeBlankLines'),
                         },
-
                         multipleSpaces: {
                             value: false,
-                            label: "Múltiplos espaços por um espaço"
+                            label: this.$t('message.transforms.whitespaces.actions.multipleSpaces'),
                         },
                         multipleLines: {
                             value: false,
-                            label: "Múltiplas quebras de linha por uma"
+                            label: this.$t('message.transforms.whitespaces.actions.multipleLines'),
                         },
                         removeLineBreaks: {
                             value: false,
-                            label: "Remover quebras de linha"
+                            label: this.$t('message.transforms.whitespaces.actions.removeLineBreaks'),
                         },
-
                         lineBreakToSpace: {
                             value: false,
-                            label: "Substituir quebras de linha por espaço"
+                            label: this.$t('message.transforms.whitespaces.actions.lineBreakToSpace'),
                         },
                     }
                 },
@@ -539,6 +537,27 @@ export default {
             document.execCommand('copy')
             document.body.removeChild(textarea)
         }
-    }
+    },
+    watch: {
+        '$i18n.locale': function() {
+            this.formats.label = this.$t('message.formats.label');
+            this.formats.actions.notChange.label = this.$t('message.formats.actions.notChange');
+            this.formats.actions.uppercase.label = this.$t('message.formats.actions.uppercase');
+            this.formats.actions.lowercase.label = this.$t('message.formats.actions.lowercase');
+            this.formats.actions.capitalizeWords.label = this.$t('message.formats.actions.capitalizeWords');
+            this.formats.actions.capitalizeSentences.label = this.$t('message.formats.actions.capitalizeSentences');
+
+            this.transforms.whitespaces.label = this.$t('message.transforms.whitespaces.label');           
+            this.transforms.whitespaces.actions.trim.label = this.$t('message.transforms.whitespaces.actions.trim');
+            this.transforms.whitespaces.actions.removeLeadingSpaces.label = this.$t('message.transforms.whitespaces.actions.removeLeadingSpaces');
+            this.transforms.whitespaces.actions.removeTrailingSpaces.label = this.$t('message.transforms.whitespaces.actions.removeTrailingSpaces');
+            this.transforms.whitespaces.actions.removeBlankLines.label = this.$t('message.transforms.whitespaces.actions.removeBlankLines');
+            this.transforms.whitespaces.actions.multipleSpaces.label = this.$t('message.transforms.whitespaces.actions.multipleSpaces');
+            this.transforms.whitespaces.actions.multipleLines.label = this.$t('message.transforms.whitespaces.actions.multipleLines');
+            this.transforms.whitespaces.actions.removeLineBreaks.label = this.$t('message.transforms.whitespaces.actions.removeLineBreaks');
+            this.transforms.whitespaces.actions.lineBreakToSpace.label = this.$t('message.transforms.whitespaces.actions.lineBreakToSpace');
+
+        }
+    },
 }
 </script>

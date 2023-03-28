@@ -21,7 +21,7 @@ const messages = {
         copyResult: "Copy result",
       },
       formats: {
-        label: "Formatar texto",
+        label: "Format text",
         actions: {
           notChange: "Do not format",
           uppercase: "Uppercase",
@@ -30,6 +30,21 @@ const messages = {
           capitalizeSentences: "Capitalize sentences",
         },
       },
+      transforms: {
+        whitespaces: {
+          label: "Whitespaces",
+          actions: {
+            trim: "Remove spaces at the beginning and end of lines",
+            removeLeadingSpaces: "Remove spaces at the beginning of lines",
+            removeTrailingSpaces: "Remove spaces at the end of lines",
+            removeBlankLines: "Remove blank lines",
+            multipleSpaces: "Multiple spaces by one space",
+            multipleLines: "Multiple line breaks by one",
+            removeLineBreaks: "Remove line breaks",
+            lineBreakToSpace: "Replace line breaks with space"
+          },
+        }
+      }
     }
   },
 
@@ -57,6 +72,21 @@ const messages = {
           capitalizeSentences: "Capitalizar sentenças",
         },
       },
+      transforms: {
+        whitespaces: {
+          label: "Espaços em branco",
+          actions: {
+            trim: "Remover espaços no início e final das linhas",
+            removeLeadingSpaces: "Remover espaços no início das linhas",
+            removeTrailingSpaces: "Remover espaços no final das linhas",
+            removeBlankLines: "Remover linhas em branco",
+            multipleSpaces: "Múltiplos espaços por um espaço",
+            multipleLines: "Múltiplas quebras de linha por uma",
+            removeLineBreaks: "Remover quebras de linha",
+            lineBreakToSpace: "Substituir quebras de linha por espaço"
+          },
+        }
+      }
     }
   }
 }
