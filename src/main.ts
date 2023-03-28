@@ -44,6 +44,35 @@ const messages = {
             lineBreakToSpace: "Replace line breaks with space"
           },
         }
+      },
+      articles: {
+        changeText: [
+          {
+            title: 'Transform, replace and format texts easily with ChangeText',
+            description: 'If you\'re a writer, student, or marketer, you\'ve probably come across the need to format, replace, or transform text at some point. This can be frustrating and time consuming if you don\'t have the right tools. Fortunately, there is a free site called ChangeText that can help you accomplish these tasks quickly and easily.',
+          },
+          {
+            title: 'Features',
+            description: 'ChangeText offers three main features to make your work with text easier: formatting, replacing and transforming.',
+            tag: 'h2',
+          },
+          {
+            title: 'Text formatting',
+            description: 'If you need to change the style, size or color of text, ChangeText has the tools to help you. With options like "Capital Case", "Lower Case", "Invert Case" and "Title Capitalization", you can quickly format the text to suit your needs.',
+          },
+          {
+            title: 'Text Replacement',
+            description: 'ChangeText also allows you to easily replace specific words or phrases in the text. You can use "Replace word" option to replace individual words or "Replace block of text" option to replace entire blocks of text. Also, you can use "Remove Extra Space" option to remove extra spaces between words and sentences.',
+          },
+          {
+            title: 'Text Transformation',
+            description: 'Finally, the transform functionality allows you to change the text in a variety of ways. With options like "HTML Encoding", "URL Encoding" and "Convert Text to List", you can quickly transform text to be used in different contexts. Now that you know what ChangeText can do, let\'s learn how to use it in your next project.',
+          },
+          {
+            title: 'Conclusion',
+            description: 'ChangeText is a simple and effective tool that can help you save time and effort in text editing. With its formatting, replacing and transforming functionalities, you can easily customize the text to suit your specific needs. While the site has its limitations, it\'s a great choice for those looking for a free, easy-to-use tool.',
+          },
+        ],
       }
     }
   },
@@ -85,7 +114,36 @@ const messages = {
             removeLineBreaks: "Remover quebras de linha",
             lineBreakToSpace: "Substituir quebras de linha por espaço"
           },
-        }
+        },
+      },
+      articles: {
+        changeText: [
+          {
+            title: 'Transforme, substitua e formate textos facilmente com o ChangeText',
+            description: 'Se você é um escritor, estudante ou profissional de marketing, provavelmente já se deparou com a necessidade de formatar, substituir ou transformar o texto em algum momento. Isso pode ser frustrante e consumir muito tempo se você não tiver as ferramentas certas. Felizmente, existe um site gratuito chamado ChangeText que pode ajudá-lo a realizar essas tarefas de forma rápida e fácil.',
+          },
+          {
+            title: 'Funcionalidades',
+            description: 'O ChangeText oferece três principais funcionalidades para facilitar o seu trabalho com o texto: formatação, substituição e transformação.',
+            tag: 'h2',
+          },
+          {
+            title: 'Formatação de texto',
+            description: 'Se você precisa alterar o estilo, tamanho ou a cor do texto, o ChangeText tem as ferramentas para ajudá-lo. Com opções como "Caixa alta", "Caixa baixa", "Inverter maiúsculas e minúsculas" e "Capitalização de título", você pode rapidamente formatar o texto para atender às suas necessidades.',
+          },
+          {
+            title: 'Substituição de texto',
+            description: 'O ChangeText também permite que você substitua facilmente palavras ou frases específicas no texto. Você pode usar a opção "Substituir palavra" para substituir palavras individuais ou "Substituir bloco de texto" para substituir blocos de texto inteiros. Além disso, você pode usar a opção "Remover espaço extra" para remover espaços extras entre palavras e frases.',
+          },
+          {
+            title: 'Transformação de texto',
+            description: 'Por fim, a funcionalidade de transformação permite que você altere o texto de várias maneiras. Com opções como "Codificação HTML", "Codificação URL" e "Converter texto em lista", você pode transformar rapidamente o texto para ser usado em diferentes contextos. Agora que você sabe o que o ChangeText pode fazer, vamos aprender como usá-lo em seu próximo projeto.',
+          },
+          {
+            title: 'Conclusão',
+            description: 'O ChangeText é uma ferramenta simples e eficaz que pode ajudá-lo a economizar tempo e esforço na edição de textos. Com suas funcionalidades de formatação, substituição e transformação, você pode facilmente personalizar o texto para atender às suas necessidades específicas. Embora o site tenha suas limitações, é uma ótima opção para aqueles que procuram uma ferramenta gratuita e fácil de usar.',
+          },
+        ],
       }
     }
   }

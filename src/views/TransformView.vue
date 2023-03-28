@@ -3,6 +3,7 @@
     import ReplaceText from '@/components/form/ReplaceText.vue'
     import Header from '../components/template/Header.vue'
     import Footer  from '../components/template/Footer.vue'
+    import ChangeText from '../components/articles/ChangeText.vue'
 </script>
 
 <template>
@@ -30,7 +31,7 @@
             <div class="flex flex-wrap w-full gap-2">
                 <label v-for="(formatValue, formatKey) in formats.actions" :key="formatKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
                     <input type="radio" :id="formatKey" :name="formatValue.label" :value="formatKey" v-model="selectedFormat" name="format" class="w-4 h-4">
-                    <span :for="formatKey" class="pl-2 w-full py-2 pr-5 cursor-pointer">{{ formatValue.label }}</span>
+                    <span :for="formatKey" class="pl-2 w-full py-2 pr-4 cursor-pointer">{{ formatValue.label }}</span>
                 </label>
             </div>
         </div>
@@ -40,7 +41,7 @@
                 <h3 :for="groupKey" class="font-bold mb-2">{{ transforms[groupKey].label }}</h3>
                 <div v-for="(itemValue, itemKey) in groupValue.actions" :key="itemKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
                     <input type="checkbox" :id="itemKey" v-model="itemValue.value" class="w-4 h-4">
-                    <label :for="itemKey" class="pl-2 w-full py-2 cursor-pointer">{{ itemValue.label }}</label>
+                    <label :for="itemKey" class="px-2 w-full py-2 cursor-pointer">{{ itemValue.label }}</label>
                 </div>
             </div>
         </div>
@@ -57,7 +58,7 @@
             <div class="flex flex-wrap w-full gap-2">
                 <label v-for="(specialValue, specialKey) in specialTransform.actions" :key="specialKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
                     <input type="radio" :id="specialKey" :name="specialValue.label" :value="specialKey" v-model="selectedSpecialFormat" name="specialTransform" class="w-4 h-4">
-                    <span :for="specialKey" class="pl-2 w-full py-2 pr-5 cursor-pointer">{{ specialValue.label }}</span>
+                    <span :for="specialKey" class="pl-2 w-full py-2 pr-4 cursor-pointer">{{ specialValue.label }}</span>
                 </label>
             </div>
         </div>
@@ -66,6 +67,13 @@
             <Button color="default" @click="transformText">Transformar</Button>
             <Button color="alternative" @click="copyToClipboard">Copiar resultado</Button>
         </div>
+
+        <div class="flex justify-center my-8 border-t pt-20 border-gray-600/20">
+            <div class="flex flex-col max-w-4xl gap-8">
+                <ChangeText></ChangeText>
+            </div>
+        </div>
+
     </div>
 
     <Footer></Footer>
