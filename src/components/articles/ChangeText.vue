@@ -16,27 +16,27 @@ export default {
         {
           title: this.$t('message.articles.changeText[0].title'),
           description: this.$t('message.articles.changeText[0].description'),
-          tag: 'h1',
+          tag: 'h2',
         },
         {
           title: this.$t('message.articles.changeText[1].title'),
           description: this.$t('message.articles.changeText[1].description'),
-          tag: 'h2',
+          tag: 'h3',
         },
         {
           title: this.$t('message.articles.changeText[2].title'),
           description: this.$t('message.articles.changeText[2].description'),
-          tag: 'h3',
+          tag: 'h4',
         },
         {
           title: this.$t('message.articles.changeText[3].title'),
           description: this.$t('message.articles.changeText[3].description'),
-          tag: 'h3',
+          tag: 'h4',
         },
         {
           title: this.$t('message.articles.changeText[4].title'),
           description: this.$t('message.articles.changeText[4].description'),
-          tag: 'h3',
+          tag: 'h4',
         },
         {
           title: this.$t('message.articles.changeText[5].title'),

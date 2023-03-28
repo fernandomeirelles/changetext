@@ -16,29 +16,29 @@
 
         <div class="flex flex-col sm:flex-row gap-4">
             <div class="flex flex-col gap">
-                <label class="font-bold mb-2" for="input-text">{{ $t('message.inputTextArea.label') }}</label>
-                <textarea class="border w-full py-2 px-3 rounded" v-model="inputText" rows="10" cols="100"></textarea>
+                <label class="font-bold mb-2" for="inputText">{{ $t('message.inputTextArea.label') }}</label>
+                <textarea id="inputText" class="border w-full py-2 px-3 rounded" v-model="inputText" rows="10" cols="100"></textarea>
             </div>
             <div class="flex flex-col gap">
-                <label class="font-bold mb-2" for="input-text">{{ $t('message.outputTextArea.label') }}</label>
-                <textarea class="bg-stone-100 border w-full py-2 px-3 rounded mb-2" readonly v-model="outputText" rows="10" cols="100"></textarea>
+                <label class="font-bold mb-2" for="outputTextArea">{{ $t('message.outputTextArea.label') }}</label>
+                <textarea id="outputTextArea" class="bg-stone-100 border w-full py-2 px-3 rounded mb-2" readonly v-model="outputText" rows="10" cols="100"></textarea>
                 <Button color="alternative" @click="copyToClipboard">{{ $t('message.outputTextArea.copyResult') }}</Button>
             </div>
         </div>
 
         <div class="flex w-full flex-col gap-2">
-            <h3 class="font-bold mb-2">{{ formats.label }}</h3>
+            <strong class="font-bold mb-2">{{ formats.label }}</strong>
             <div class="flex flex-wrap w-full gap-2">
-                <label v-for="(formatValue, formatKey) in formats.actions" :key="formatKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
+                <div v-for="(formatValue, formatKey) in formats.actions" :key="formatKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
                     <input type="radio" :id="formatKey" :name="formatValue.label" :value="formatKey" v-model="selectedFormat" name="format" class="w-4 h-4">
-                    <span :for="formatKey" class="pl-2 w-full py-2 pr-4 cursor-pointer">{{ formatValue.label }}</span>
-                </label>
+                    <label :for="formatKey" class="pl-2 w-full py-2 pr-4 cursor-pointer">{{ formatValue.label }}</label>
+                </div>
             </div>
         </div>
 
         <div class="flex lg:flex-nowrap flex-wrap gap-2">
             <div v-for="(groupValue, groupKey) in transforms" :key="groupKey" class="flex w-full flex-col gap-2">
-                <h3 :for="groupKey" class="font-bold mb-2">{{ transforms[groupKey].label }}</h3>
+                <strong :for="groupKey" class="font-bold mb-2">{{ transforms[groupKey].label }}</strong>
                 <div v-for="(itemValue, itemKey) in groupValue.actions" :key="itemKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
                     <input type="checkbox" :id="itemKey" v-model="itemValue.value" class="w-4 h-4">
                     <label :for="itemKey" class="px-2 w-full py-2 cursor-pointer">{{ itemValue.label }}</label>
@@ -47,19 +47,19 @@
         </div>
 
         <div class="flex w-full flex-col gap-2">
-            <h3 class="font-bold mb-2">{{ replace.label }}</h3>
+            <strong class="font-bold mb-2">{{ replace.label }}</strong>
             <div class="flex flex-col w-full gap-2">
                 <ReplaceText :value="inputText" @replacedText="getReplacedText"></ReplaceText>
             </div>
         </div>
 
         <div class="flex w-full flex-col gap-2">
-            <h3 class="font-bold mb-2">{{ specialTransform.label }}</h3>
+            <strong class="font-bold mb-2">{{ specialTransform.label }}</strong>
             <div class="flex flex-wrap w-full gap-2">
-                <label v-for="(specialValue, specialKey) in specialTransform.actions" :key="specialKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
+                <div v-for="(specialValue, specialKey) in specialTransform.actions" :key="specialKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
                     <input type="radio" :id="specialKey" :name="specialValue.label" :value="specialKey" v-model="selectedSpecialFormat" name="specialTransform" class="w-4 h-4">
-                    <span :for="specialKey" class="pl-2 w-full py-2 pr-4 cursor-pointer">{{ specialValue.label }}</span>
-                </label>
+                    <label :for="specialKey" class="pl-2 w-full py-2 pr-4 cursor-pointer">{{ specialValue.label }}</label>
+                </div>
             </div>
         </div>
 
@@ -163,31 +163,31 @@ export default {
                     actions: {
                         removeSpecialChars: {
                             value: false,
-                            label: "Remover caracteres especiais"
+                            label: "Remover caracteres especiais",
                         },
                         removePunctuation: {
                             value: false,
-                            label: "Remover pontuação"
+                            label: "Remover pontuação",
                         },
                         stripEmojis: {
                             value: false,
-                            label: "Remover emojis"
+                            label: "Remover emojis",
                         },
                         removeAccents: {
                             value: false,
-                            label: "Remover acentos"
+                            label: "Remover acentos",
                         },
                         normalizeUnicode: {
                             value: false,
-                            label: "Normalizar caracteres Unicode"
+                            label: "Normalizar caracteres Unicode",
                         },
                         removeNonAscii: {
                             value: false,
-                            label: "Remover caracteres não ASCII"
+                            label: "Remover caracteres não ASCII",
                         },
                         removeNonAlphanumeric: {
                             value: false,
-                            label: "Remover caracteres não alfanuméricos"
+                            label: "Remover caracteres não alfanuméricos",
                         },
                     },
                 },
@@ -197,39 +197,39 @@ export default {
                     actions: {
                         stripAllEmails: {
                             value: false,
-                            label: "Remover endereços de email"
+                            label: "Remover endereços de email",
                         },
                         removeBbcode: {
                             value: false,
-                            label: "Remover BBCode"
+                            label: "Remover BBCode",
                         },
                         unescapeHtml: {
                             value: false,
-                            label: "Desescapar HTML"
+                            label: "Desescapar HTML",
                         },
                         stripAllHtml: {
                             value: false,
-                            label: "Remover HTML"
+                            label: "Remover HTML",
                         },
                         removeIds: {
                             value: false,
-                            label: "Remover IDs"
+                            label: "Remover IDs",
                         },
                         removeClasses: {
                             value: false,
-                            label: "Remover classes"
+                            label: "Remover classes",
                         },
                         removeStyles: {
                             value: false,
-                            label: "Remover estilos"
+                            label: "Remover estilos",
                         },
                         removeAllAttributes: {
                             value: false,
-                            label: "Remover todos os atributos"
+                            label: "Remover todos os atributos",
                         },
                         decodeHtmlEntities: {
                             value: false,
-                            label: "Decodificar entidades HTML"
+                            label: "Decodificar entidades HTML",
                         },
                     },
                 },
@@ -239,19 +239,19 @@ export default {
                     actions: {                   
                         decodeUrl: {
                             value: false,
-                            label: "Decodificar URLs"
+                            label: "Decodificar URLs",
                         },
                         encodeUrl: {
                             value: false,
-                            label: "Codificar URLs"
+                            label: "Codificar URLs",
                         },
                         removeUrls: {
                             value: false,
-                            label: "Remover URLs"
+                            label: "Remover URLs",
                         },
                         convertUrlsToLinks: {
                             value: false,
-                            label: "Converter URLs em links"
+                            label: "Converter URLs em links",
                         },
                     },
                 },
@@ -261,19 +261,19 @@ export default {
                     actions: {
                         reverse: {
                             value: false,
-                            label: "Inverter"
+                            label: "Inverter",
                         },
                         commaSeparated: {
                             value: false,
-                            label: "Separar por vírgula"
+                            label: "Separar por vírgula",
                         },
                         slug: {
                             value: false,
-                            label: "Trasnformar em slug"
+                            label: "Trasnformar em slug",
                         },
                         strikethrough: {
                             value: false,
-                            label: "Tachado"
+                            label: "Tachado",
                         },
                     },
                 },
@@ -285,27 +285,27 @@ export default {
                 actions: {
                     notChangeSpecial: {
                         value: true,
-                        label: "Não formatar "
+                        label: "Não formatar ",
                     },
                     upsideDown: {
                         value: false,
-                        label: "Cabeça para baixo"
+                        label: "Cabeça para baixo",
                     },
                     morseCode: {
                         value: false,
-                        label: "Texto para código morse"
+                        label: "Texto para código morse",
                     },
                     morseToText: {
                         value: false,
-                        label: "Código morse para texto"
+                        label: "Código morse para texto",
                     },
                     binaryCode: {
                         value: false,
-                        label: "Texto para código binário"
+                        label: "Texto para código binário",
                     },
                     binaryCodeToText: {
                       value: false,
-                      label: "Códdigo binário para texto"  
+                      label: "Códdigo binário para texto",
                     },
                 },
 
