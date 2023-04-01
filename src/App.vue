@@ -28,7 +28,7 @@ export default {
         description: description,
         image: 'https://fernandomeirelles.github.io/changetext/meta-image.jpg',
       },
-        htmlAttrs: { lang: 'en', amp: true }
+        htmlAttrs: { lang: 'pt-br', amp: true }
       },
     )
   }

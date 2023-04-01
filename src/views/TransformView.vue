@@ -10,62 +10,66 @@
     <Header></Header>
 
     <div class="flex flex-col gap-8 w-full">
-        <h1 class="text-sm text-slate-500">
-            {{ $t('message.description') }}
-        </h1>
+        <div class="flex flex-col gap-10 w-full">
+            <h1 class="text-sm text-slate-500">
+                {{ $t('message.description') }}
+            </h1>
 
-        <div class="flex flex-col sm:flex-row gap-4">
-            <div class="flex flex-col gap">
-                <label class="font-bold mb-2" for="inputText">{{ $t('message.inputTextArea.label') }}</label>
-                <textarea id="inputText" class="border w-full py-2 px-3 rounded" v-model="inputText" rows="10" cols="100"></textarea>
-            </div>
-            <div class="flex flex-col gap">
-                <label class="font-bold mb-2" for="outputTextArea">{{ $t('message.outputTextArea.label') }}</label>
-                <textarea id="outputTextArea" class="bg-stone-100 border w-full py-2 px-3 rounded mb-2" readonly v-model="outputText" rows="10" cols="100"></textarea>
-                <Button color="alternative" @click="copyToClipboard">{{ $t('message.outputTextArea.copyResult') }}</Button>
-            </div>
-        </div>
-
-        <div class="flex w-full flex-col gap-2">
-            <strong class="font-bold mb-2">{{ formats.label }}</strong>
-            <div class="flex flex-wrap w-full gap-2">
-                <div v-for="(formatValue, formatKey) in formats.actions" :key="formatKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
-                    <input type="radio" :id="formatKey" :name="formatValue.label" :value="formatKey" v-model="selectedFormat" name="format" class="w-4 h-4">
-                    <label :for="formatKey" class="pl-2 w-full py-2 pr-4 cursor-pointer">{{ formatValue.label }}</label>
+            <div ref="inputTextRef" @scroll="handleSCroll" class="flex flex-col sm:flex-row gap-4 bg-white pt-4 pb-2 lg:sticky lg:top-0">
+                <div class="flex flex-col gap">
+                    <label class="font-bold mb-2" for="inputText">{{ $t('message.inputTextArea.label') }}</label>
+                    <textarea id="inputText" class="border w-full py-2 px-3 rounded" v-model="inputText" rows="6" cols="100"></textarea>
+                </div>
+                <div class="flex flex-col gap relative">
+                    <label class="font-bold mb-2" for="outputTextArea">{{ $t('message.outputTextArea.label') }}</label>
+                    <textarea id="outputTextArea" class="bg-stone-100 border w-full py-2 px-3 rounded" readonly v-model="outputText" rows="6" cols="100"></textarea>
+                    <Button class="absolute bottom-2 right-2" color="alternative" @click="copyToClipboard">{{ $t('message.outputTextArea.copyResult') }}</Button>
                 </div>
             </div>
-        </div>
 
-        <div class="flex lg:flex-nowrap flex-wrap gap-2">
-            <div v-for="(groupValue, groupKey) in transforms" :key="groupKey" class="flex w-full flex-col gap-2">
-                <strong :for="groupKey" class="font-bold mb-2">{{ transforms[groupKey].label }}</strong>
-                <div v-for="(itemValue, itemKey) in groupValue.actions" :key="itemKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
-                    <input type="checkbox" :id="itemKey" v-model="itemValue.value" class="w-4 h-4">
-                    <label :for="itemKey" class="px-2 w-full py-2 cursor-pointer">{{ itemValue.label }}</label>
+            <div class="flex w-full flex-col gap-2">
+                <strong class="font-bold mb-2">{{ formats.label }}</strong>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+                    <div v-for="(formatValue, formatKey) in formats.actions" :key="formatKey" class="flex pl-4 py-1 items-center border border-gray-200 rounded cursor-pointer">
+                        <input type="radio" :id="formatKey" :name="formatValue.label" :value="formatKey" v-model="selectedFormat" name="format" class="w-4 h-4">
+                        <label :for="formatKey" class="pl-2 w-full py-2 pr-4 cursor-pointer">{{ formatValue.label }}</label>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="flex w-full flex-col gap-2">
-            <strong class="font-bold mb-2">{{ replace.label }}</strong>
-            <div class="flex flex-col w-full gap-2">
-                <ReplaceText :value="inputText" @replacedText="getReplacedText"></ReplaceText>
-            </div>
-        </div>
-
-        <div class="flex w-full flex-col gap-2">
-            <strong class="font-bold mb-2">{{ specialTransform.label }}</strong>
-            <div class="flex flex-wrap w-full gap-2">
-                <div v-for="(specialValue, specialKey) in specialTransform.actions" :key="specialKey" class="flex pl-4 items-center border border-gray-200 rounded cursor-pointer">
-                    <input type="radio" :id="specialKey" :name="specialValue.label" :value="specialKey" v-model="selectedSpecialFormat" name="specialTransform" class="w-4 h-4">
-                    <label :for="specialKey" class="pl-2 w-full py-2 pr-4 cursor-pointer">{{ specialValue.label }}</label>
+            <div class="flex flex-col lg:flex-nowrap flex-wrap gap-10">
+                <div v-for="(groupValue, groupKey) in transforms" :key="groupKey" class="flex w-full flex-col gap-2">
+                    <strong :for="groupKey" class="font-bold mb-2">{{ transforms[groupKey].label }}</strong>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+                        <div v-for="(itemValue, itemKey) in groupValue.actions" :key="itemKey" class="flex pl-4 py-1 items-center border border-gray-200 rounded cursor-pointer">
+                            <input type="checkbox" :id="itemKey" v-model="itemValue.value" class="w-4 h-4">
+                            <label :for="itemKey" class="px-2 w-full py-2 cursor-pointer">{{ itemValue.label }}</label>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="flex gap-4 sticky bottom-0 bg-white py-4 border-t-2 border-gray-100">
-            <Button color="default" @click="transformText">{{ $t('message.buttons.transform') }}</Button>
-            <Button color="alternative" @click="copyToClipboard">{{ $t('message.buttons.copyResult') }}</Button>
+            <div class="flex w-full flex-col gap-2">
+                <strong class="font-bold mb-2">{{ specialTransform.label }}</strong>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+                    <div v-for="(specialValue, specialKey) in specialTransform.actions" :key="specialKey" class="flex pl-4 py-1 items-center border border-gray-200 rounded cursor-pointer">
+                        <input type="radio" :id="specialKey" :name="specialValue.label" :value="specialKey" v-model="selectedSpecialFormat" name="specialTransform" class="w-4 h-4">
+                        <label :for="specialKey" class="pl-2 w-full py-2 pr-4 cursor-pointer">{{ specialValue.label }}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex w-full flex-col gap-2">
+                <strong class="font-bold mb-2">{{ replace.label }}</strong>
+                <div class="flex flex-col w-full gap-2">
+                    <ReplaceText :value="inputText" @replacedText="getReplacedText"></ReplaceText>
+                </div>
+            </div>
+
+            <div ref="actionsBarRef" class="flex gap-4 sticky bottom-0 bg-white py-4 border-t-2 border-gray-100">
+                <Button size="xl" shadow color="default" @click="transformText">{{ $t('message.buttons.transform') }}</Button>
+                <Button size="xl" shadow color="alternative" @click="copyToClipboard">{{ $t('message.buttons.copyResult') }}</Button>
+            </div>
         </div>
 
         <div class="flex justify-center my-8 border-t pt-20 border-gray-600/20">
@@ -544,7 +548,7 @@ export default {
             textarea.select()
             document.execCommand('copy')
             document.body.removeChild(textarea)
-        }
+        },
     },
     watch: {
         '$i18n.locale': function() {
