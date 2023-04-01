@@ -2,13 +2,13 @@
     <input type="hidden" :value="formattedText" disabled/>
 
     <div v-for="(substitution, index) in substitutions" :key="index" class="flex items-center gap-2 sm:gap-4 w-full">
-        <input type="text" v-model="substitution.searchTerm" placeholder="Localizar" class="w-full">
+        <input type="text" v-model="substitution.searchTerm" :placeholder="$t('message.replace.fields.locate')" class="w-full">
         <ArrowRightIcon class="h-6 w-6 flex-shrink-0 text-black-600" aria-hidden="true"/>
-        <input type="text" v-model="substitution.replaceTerm" placeholder="Substituir" class="w-full">
+        <input type="text" v-model="substitution.replaceTerm" :placeholder="$t('message.replace.fields.replace')" class="w-full">
         <Button color="alternative" @click="removeSubstitution(index)">
           <div class="flex items-center gap-2">
             <XMarkIcon class="h-6 w-6 flex-shrink-0 text-black-600" aria-hidden="true"/>
-            Apagar
+            {{ $t('message.replace.actions.delete') }}
           </div>
       </Button>
     </div>
@@ -16,7 +16,7 @@
       <Button color="alternative" @click="addSubstitution">
         <div class="flex items-center gap-2">
           <PlusIcon class="h-6 w-6 flex-shrink-0 text-black-600" aria-hidden="true"/>
-          Adicionar
+          {{ $t('message.replace.actions.add') }}
         </div>
       </Button>
     </div>

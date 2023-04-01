@@ -20,10 +20,18 @@ const messages = {
         label: "Output text",
         copyResult: "Copy result",
       },
+      buttons: {
+        transform: "Transform",
+        copyResult: "Copy result",
+      },
+      i18n: {
+        'pt-br': "Portuguese",
+        en: "English"
+      },
       formats: {
         label: "Format text",
         actions: {
-          notChange: "Do not format",
+          notChange: "Don't format",
           uppercase: "Uppercase",
           lowercase: "Lowercase",
           capitalizeWords: "Capitalize words",
@@ -43,7 +51,73 @@ const messages = {
             removeLineBreaks: "Remove line breaks",
             lineBreakToSpace: "Replace line breaks with space"
           },
-        }
+        },
+        characters: {
+          label: "Characters",
+          actions: {
+              removeSpecialChars: "Remove special characters",
+              removePunctuation: "Remove Punctuation",
+              stripEmojis: "Remove emojis",
+              removeAccents: "Remove Accents",
+              normalizeUnicode: "Normalize Unicode characters",
+              removeNonAscii: "Remove non-ASCII characters",
+              removeNonAlphanumeric: "Remove non-alphanumeric characters",
+          },
+        },
+        html: {
+          label: "HTML",
+          actions: {
+              stripAllEmails: "Remove email addresses",
+              removeBbcode: "Remove BBCode",
+              unescapeHtml: "Unescape HTML",
+              stripAllHtml: "Remove HTML",
+              removeIds: "Remove IDs",
+              removeClasses: "Remove classes",
+              removeStyles: "Remove styles",
+              removeAllAttributes: "Remove all attributes",
+              decodeHtmlEntities: "Decode HTML Entities",
+          },
+        },
+        url: {
+          label: "URL",
+          actions: {
+              decodeUrl: "Decode URLs",
+              encodeUrl: "Encode URLs",
+              removeUrls: "Remove URLs",
+              convertUrlsToLinks: "Convert URLs to Links",
+          },
+        },
+        others: {
+          label: "Other",
+          actions: {
+              reverse: "Invert",
+              commaSeparated: "Separate by comma",
+              slug: "Turn into slug",
+              strikethrough: "Strikethrough",
+          },
+        },
+      },
+      specialTransform: {
+        label: "Special",
+        actions: {
+            notChangeSpecial: "Don't format ",
+            upsideDown: "Upside Down",
+            morseCode: "Text to morse code",
+            morseToText: "Morse code to text",
+            binaryCode: "Text to binary code",
+            binaryCodeToText: "Binary code to text",
+        },
+      },
+      replace: {
+        label: "Replace text",
+        fields: {
+          locate: "Find",
+          replace: "Replace",
+        },
+        actions: {
+            add: "Add",
+            delete: "Delete",
+        },
       },
       articles: {
         changeText: [
@@ -81,15 +155,20 @@ const messages = {
     message: {
       description: "Change Text melhora a formatação e limpeza do seu texto com uma solução completa e gratuita. Realize diversas operações, como remoção de quebras de linha e caracteres, busca e substituição de texto, formatações para HTML e URL e muito mais. Change Text é a ferramenta perfeita para limpar e formatar seu texto de forma simples e eficiente. Experimente agora!",
       copyright: "Todos os direitos reservados.",
-      textFormat: {
-
-      },
       inputTextArea: {
         label: "Texto de entrada"
       },
       outputTextArea: {
         label: "Texto de saída",
         copyResult: "Copiar resultado",
+      },
+      buttons: {
+        transform: "Transformar",
+        copyResult: "Copiar resultado",
+      },
+      i18n: {
+        'pt-br': "Português",
+        en: "Inglês"
       },
       formats: {
         label: "Formatar texto",
@@ -114,6 +193,72 @@ const messages = {
             removeLineBreaks: "Remover quebras de linha",
             lineBreakToSpace: "Substituir quebras de linha por espaço"
           },
+        },
+        characters: {
+          label: "Caracteres",
+          actions: {
+              removeSpecialChars: "Remover caracteres especiais",
+              removePunctuation: "Remover pontuação",
+              stripEmojis: "Remover emojis",
+              removeAccents: "Remover acentos",
+              normalizeUnicode: "Normalizar caracteres Unicode",
+              removeNonAscii: "Remover caracteres não ASCII",
+              removeNonAlphanumeric: "Remover caracteres não alfanuméricos",
+          },
+        },
+        html: {
+          label: "HTML",
+          actions: {
+              stripAllEmails: "Remover endereços de email",
+              removeBbcode: "Remover BBCode",
+              unescapeHtml: "Desescapar HTML",
+              stripAllHtml: "Remover HTML",
+              removeIds: "Remover IDs",
+              removeClasses: "Remover classes",
+              removeStyles: "Remover estilos",
+              removeAllAttributes: "Remover todos os atributos",
+              decodeHtmlEntities: "Decodificar entidades HTML",
+          },
+        },
+        url: {
+          label: "URL",
+          actions: {                   
+              decodeUrl: "Decodificar URLs",
+              encodeUrl: "Codificar URLs",
+              removeUrls: "Remover URLs",
+              convertUrlsToLinks: "Converter URLs em links",
+          },
+        },
+        others: {
+          label: "Outros",
+          actions: {
+              reverse: "Inverter",
+              commaSeparated: "Separar por vírgula",
+              slug: "Trasnformar em slug",
+              strikethrough: "Tachado",
+          },
+        },
+      },
+      specialTransform: {
+        label: "Especial",
+        actions: {
+            notChangeSpecial: "Não formatar ",
+            upsideDown: "Cabeça para baixo",
+            morseCode: "Texto para código morse",
+            morseToText: "Código morse para texto",
+            binaryCode: "Texto para código binário",
+            binaryCodeToText: "Códdigo binário para texto",
+        },
+      },
+      replace: {
+        label: "Substituir texto",
+        fields: {
+          locate: "Localizar",
+          replace: "Substituir",
+        },
+        actions: {
+            add: "Adicionar",
+            delete: "Apagar",
         },
       },
       articles: {

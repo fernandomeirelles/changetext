@@ -64,8 +64,8 @@
         </div>
 
         <div class="flex gap-4 sticky bottom-0 bg-white py-4 border-t-2 border-gray-100">
-            <Button color="default" @click="transformText">Transformar</Button>
-            <Button color="alternative" @click="copyToClipboard">Copiar resultado</Button>
+            <Button color="default" @click="transformText">{{ $t('message.buttons.transform') }}</Button>
+            <Button color="alternative" @click="copyToClipboard">{{ $t('message.buttons.copyResult') }}</Button>
         </div>
 
         <div class="flex justify-center my-8 border-t pt-20 border-gray-600/20">
@@ -90,7 +90,7 @@ export default {
             selectedFormat: 'notChange',
             selectedSpecialFormat: 'notChangeSpecial',
             replace: {
-                label: "Substituir texto"
+                label: this.$t('message.replace.label'),
             },
             formats: {
                 label: this.$t('message.formats.label'),
@@ -159,121 +159,121 @@ export default {
                 },
 
                 characters: {
-                    label: "characters",
+                    label: this.$t('message.transforms.characters.label'),
                     actions: {
                         removeSpecialChars: {
                             value: false,
-                            label: "Remover caracteres especiais",
+                            label: this.$t('message.transforms.characters.actions.removeSpecialChars'),
                         },
                         removePunctuation: {
                             value: false,
-                            label: "Remover pontuação",
+                            label: this.$t('message.transforms.characters.actions.removePunctuation'),
                         },
                         stripEmojis: {
                             value: false,
-                            label: "Remover emojis",
+                            label: this.$t('message.transforms.characters.actions.stripEmojis'),
                         },
                         removeAccents: {
                             value: false,
-                            label: "Remover acentos",
+                            label: this.$t('message.transforms.characters.actions.removeAccents'),
                         },
                         normalizeUnicode: {
                             value: false,
-                            label: "Normalizar caracteres Unicode",
+                            label: this.$t('message.transforms.characters.actions.normalizeUnicode'),
                         },
                         removeNonAscii: {
                             value: false,
-                            label: "Remover caracteres não ASCII",
+                            label: this.$t('message.transforms.characters.actions.removeNonAscii'),
                         },
                         removeNonAlphanumeric: {
                             value: false,
-                            label: "Remover caracteres não alfanuméricos",
+                            label: this.$t('message.transforms.characters.actions.removeNonAlphanumeric'),
                         },
                     },
                 },
                 
                 html: {
-                    label: "html",
+                    label: this.$t('message.transforms.html.label'),
                     actions: {
                         stripAllEmails: {
                             value: false,
-                            label: "Remover endereços de email",
+                            label: this.$t('message.transforms.html.actions.stripAllEmails'),
                         },
                         removeBbcode: {
                             value: false,
-                            label: "Remover BBCode",
+                            label: this.$t('message.transforms.html.actions.removeBbcode'),
                         },
                         unescapeHtml: {
                             value: false,
-                            label: "Desescapar HTML",
+                            label: this.$t('message.transforms.html.actions.unescapeHtml'),
                         },
                         stripAllHtml: {
                             value: false,
-                            label: "Remover HTML",
+                            label: this.$t('message.transforms.html.actions.stripAllHtml'),
                         },
                         removeIds: {
                             value: false,
-                            label: "Remover IDs",
+                            label: this.$t('message.transforms.html.actions.removeIds'),
                         },
                         removeClasses: {
                             value: false,
-                            label: "Remover classes",
+                            label: this.$t('message.transforms.html.actions.removeClasses'),
                         },
                         removeStyles: {
                             value: false,
-                            label: "Remover estilos",
+                            label: this.$t('message.transforms.html.actions.removeStyles'),
                         },
                         removeAllAttributes: {
                             value: false,
-                            label: "Remover todos os atributos",
+                            label: this.$t('message.transforms.html.actions.removeAllAttributes'),
                         },
                         decodeHtmlEntities: {
                             value: false,
-                            label: "Decodificar entidades HTML",
+                            label: this.$t('message.transforms.html.actions.decodeHtmlEntities'),
                         },
                     },
                 },
 
                 url: {
-                    label: "url",
+                    label: this.$t('message.transforms.url.label'),
                     actions: {                   
                         decodeUrl: {
                             value: false,
-                            label: "Decodificar URLs",
+                            label: this.$t('message.transforms.url.actions.decodeUrl'),
                         },
                         encodeUrl: {
                             value: false,
-                            label: "Codificar URLs",
+                            label: this.$t('message.transforms.url.actions.encodeUrl'),
                         },
                         removeUrls: {
                             value: false,
-                            label: "Remover URLs",
+                            label: this.$t('message.transforms.url.actions.removeUrls'),
                         },
                         convertUrlsToLinks: {
                             value: false,
-                            label: "Converter URLs em links",
+                            label: this.$t('message.transforms.url.actions.convertUrlsToLinks'),
                         },
                     },
                 },
 
                 others: {
-                    label: "others",
+                    label: this.$t('message.transforms.others.label'),
                     actions: {
                         reverse: {
                             value: false,
-                            label: "Inverter",
+                            label: this.$t('message.transforms.others.actions.reverse'),
                         },
                         commaSeparated: {
                             value: false,
-                            label: "Separar por vírgula",
+                            label: this.$t('message.transforms.others.actions.commaSeparated'),
                         },
                         slug: {
                             value: false,
-                            label: "Trasnformar em slug",
+                            label: this.$t('message.transforms.others.actions.slug'),
                         },
                         strikethrough: {
                             value: false,
-                            label: "Tachado",
+                            label: this.$t('message.transforms.others.actions.strikethrough'),
                         },
                     },
                 },
@@ -281,31 +281,31 @@ export default {
             },
 
             specialTransform: {
-                label: "Especial",
+                label: this.$t('message.specialTransform.label'),
                 actions: {
                     notChangeSpecial: {
                         value: true,
-                        label: "Não formatar ",
+                        label: this.$t('message.specialTransform.actions.notChangeSpecial'),
                     },
                     upsideDown: {
                         value: false,
-                        label: "Cabeça para baixo",
+                        label: this.$t('message.specialTransform.actions.upsideDown'),
                     },
                     morseCode: {
                         value: false,
-                        label: "Texto para código morse",
+                        label: this.$t('message.specialTransform.actions.morseCode'),
                     },
                     morseToText: {
                         value: false,
-                        label: "Código morse para texto",
+                        label: this.$t('message.specialTransform.actions.morseToText'),
                     },
                     binaryCode: {
                         value: false,
-                        label: "Texto para código binário",
+                        label: this.$t('message.specialTransform.actions.binaryCode'),
                     },
                     binaryCodeToText: {
                       value: false,
-                      label: "Códdigo binário para texto",
+                      label: this.$t('message.specialTransform.actions.binaryCodeToText'),
                     },
                 },
 
@@ -565,6 +565,47 @@ export default {
             this.transforms.whitespaces.actions.removeLineBreaks.label = this.$t('message.transforms.whitespaces.actions.removeLineBreaks');
             this.transforms.whitespaces.actions.lineBreakToSpace.label = this.$t('message.transforms.whitespaces.actions.lineBreakToSpace');
 
+            this.transforms.characters.label = this.$t('message.transforms.characters.label');           
+            this.transforms.characters.actions.removeSpecialChars.label = this.$t('message.transforms.characters.actions.removeSpecialChars');
+            this.transforms.characters.actions.removePunctuation.label = this.$t('message.transforms.characters.actions.removePunctuation');
+            this.transforms.characters.actions.stripEmojis.label = this.$t('message.transforms.characters.actions.removePunctuation');
+            this.transforms.characters.actions.removeAccents.label = this.$t('message.transforms.characters.actions.removeAccents');
+            this.transforms.characters.actions.normalizeUnicode.label = this.$t('message.transforms.characters.actions.normalizeUnicode');
+            this.transforms.characters.actions.removeNonAscii.label = this.$t('message.transforms.characters.actions.removeNonAscii');
+            this.transforms.characters.actions.removeNonAlphanumeric.label = this.$t('message.transforms.characters.actions.removeNonAlphanumeric');
+
+            this.transforms.html.label = this.$t('message.transforms.html.label');           
+            this.transforms.html.actions.stripAllEmails.label = this.$t('message.transforms.html.actions.stripAllEmails');
+            this.transforms.html.actions.removeBbcode.label = this.$t('message.transforms.html.actions.removeBbcode');
+            this.transforms.html.actions.unescapeHtml.label = this.$t('message.transforms.html.actions.unescapeHtml');
+            this.transforms.html.actions.stripAllHtml.label = this.$t('message.transforms.html.actions.stripAllHtml');
+            this.transforms.html.actions.removeIds.label = this.$t('message.transforms.html.actions.removeIds');
+            this.transforms.html.actions.removeClasses.label = this.$t('message.transforms.html.actions.removeClasses');
+            this.transforms.html.actions.removeStyles.label = this.$t('message.transforms.html.actions.removeStyles');
+            this.transforms.html.actions.removeAllAttributes.label = this.$t('message.transforms.html.actions.removeAllAttributes');
+            this.transforms.html.actions.decodeHtmlEntities.label = this.$t('message.transforms.html.actions.decodeHtmlEntities');
+
+            this.transforms.url.label = this.$t('message.transforms.url.label');           
+            this.transforms.url.actions.decodeUrl.label = this.$t('message.transforms.url.actions.decodeUrl');
+            this.transforms.url.actions.encodeUrl.label = this.$t('message.transforms.url.actions.encodeUrl');
+            this.transforms.url.actions.removeUrls.label = this.$t('message.transforms.url.actions.removeUrls');
+            this.transforms.url.actions.convertUrlsToLinks.label = this.$t('message.transforms.url.actions.convertUrlsToLinks');
+
+            this.transforms.others.label = this.$t('message.transforms.others.label');           
+            this.transforms.others.actions.reverse.label = this.$t('message.transforms.others.actions.reverse');
+            this.transforms.others.actions.commaSeparated.label = this.$t('message.transforms.others.actions.commaSeparated');
+            this.transforms.others.actions.slug.label = this.$t('message.transforms.others.actions.slug');
+            this.transforms.others.actions.strikethrough.label = this.$t('message.transforms.others.actions.strikethrough');
+
+            this.specialTransform.label = this.$t('message.specialTransform.label');           
+            this.specialTransform.actions.notChangeSpecial.label = this.$t('message.specialTransform.actions.notChangeSpecial');
+            this.specialTransform.actions.upsideDown.label = this.$t('message.specialTransform.actions.upsideDown');
+            this.specialTransform.actions.morseCode.label = this.$t('message.specialTransform.actions.morseCode');
+            this.specialTransform.actions.morseToText.label = this.$t('message.specialTransform.actions.morseToText');
+            this.specialTransform.actions.binaryCode.label = this.$t('message.specialTransform.actions.binaryCode');
+            this.specialTransform.actions.binaryCodeToText.label = this.$t('message.specialTransform.actions.binaryCodeToText');
+        
+            this.replace.label = this.$t('message.replace.label');
         }
     },
 }
