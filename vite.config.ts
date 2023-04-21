@@ -8,7 +8,7 @@ export default defineConfig({
   //base: '/changetext/',
   plugins: [vue()],
   build: {
-    //target: 'esnext'
+    target: 'esnext'
   },
   resolve: {
     alias: {
