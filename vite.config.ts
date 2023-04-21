@@ -5,10 +5,10 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/changetext/',
+  //base: '/changetext/',
   plugins: [vue()],
   build: {
-    target: 'esnext'
+    //target: 'esnext'
   },
   resolve: {
     alias: {
