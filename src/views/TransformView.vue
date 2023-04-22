@@ -27,42 +27,44 @@
                 </div>
             </div>
 
-            <div class="flex w-full flex-col gap-2">
-                <strong class="font-bold mb-2">{{ formats.label }}</strong>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-                    <div v-for="(formatValue, formatKey) in formats.actions" :key="formatKey" :class="[selectedFormat === formatKey ? 'bg-blue-50 border-blue-700 hover:border-blue-700' : 'border-gray-200','flex pl-4 py-1 border items-center rounded cursor-pointer hover:border-blue-400 transition-all']">
-                        <input type="radio" :id="formatKey" :name="formatValue.label" :value="formatKey" v-model="selectedFormat" name="format" class="w-4 h-4">
-                        <label :for="formatKey" class="pl-2 w-full py-2 pr-4 cursor-pointer">{{ formatValue.label }}</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col lg:flex-nowrap flex-wrap gap-10">
-                <div v-for="(groupValue, groupKey) in transforms" :key="groupKey" class="flex w-full flex-col gap-2">
-                    <strong :for="groupKey" class="font-bold mb-2">{{ transforms[groupKey].label }}</strong>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-                        <div v-for="(itemValue, itemKey) in groupValue.actions" :key="itemKey" :class="[itemValue.value === true ? 'bg-blue-50 border-blue-700 hover:border-blue-700' : 'border-gray-200' ,'flex pl-4 py-1 border items-center rounded cursor-pointer hover:border-blue-400']">
-                            <input type="checkbox" :id="itemKey" v-model="itemValue.value" class="w-4 h-4">
-                            <label :for="itemKey" class="px-2 w-full py-2 cursor-pointer">{{ itemValue.label }}</label>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
+                <div class="flex w-full flex-col gap-2">
+                    <strong class="font-bold mb-2">{{ formats.label }}</strong>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <div v-for="(formatValue, formatKey) in formats.actions" :key="formatKey" :class="[selectedFormat === formatKey ? 'bg-blue-50 border-blue-700 hover:border-blue-700' : 'border-gray-200','flex pl-4 py-1 border items-center rounded cursor-pointer hover:border-blue-400 transition-all']">
+                            <input type="radio" :id="formatKey" :name="formatValue.label" :value="formatKey" v-model="selectedFormat" name="format" class="w-4 h-4">
+                            <label :for="formatKey" class="pl-2 w-full py-2 pr-4 cursor-pointer">{{ formatValue.label }}</label>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="flex w-full flex-col gap-2">
-                <strong class="font-bold mb-2">{{ specialTransform.label }}</strong>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-                    <div v-for="(specialValue, specialKey) in specialTransform.actions" :key="specialKey" :class="[selectedSpecialFormat === specialKey ? 'bg-blue-50 border-blue-700 hover:border-blue-700' : 'border-gray-200','flex pl-4 py-1 border items-center rounded cursor-pointer hover:border-blue-400']">
-                        <input type="radio" :id="specialKey" :name="specialValue.label" :value="specialKey" v-model="selectedSpecialFormat" name="specialTransform" class="w-4 h-4">
-                        <label :for="specialKey" class="pl-2 w-full py-2 pr-4 cursor-pointer">{{ specialValue.label }}</label>
+                <!-- <div class="flex flex-col lg:flex-nowrap flex-wrap gap-10"> -->
+                    <div v-for="(groupValue, groupKey) in transforms" :key="groupKey" class="flex w-full flex-col gap-2">
+                        <strong :for="groupKey" class="font-bold mb-2">{{ transforms[groupKey].label }}</strong>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <div v-for="(itemValue, itemKey) in groupValue.actions" :key="itemKey" :class="[itemValue.value === true ? 'bg-blue-50 border-blue-700 hover:border-blue-700' : 'border-gray-200' ,'flex pl-4 py-1 border items-center rounded cursor-pointer hover:border-blue-400 transition-all']">
+                                <input type="checkbox" :id="itemKey" v-model="itemValue.value" class="w-4 h-4">
+                                <label :for="itemKey" class="px-2 w-full py-2 cursor-pointer">{{ itemValue.label }}</label>
+                            </div>
+                        </div>
+                    </div>
+                <!-- </div> -->
+
+                <div class="flex w-full flex-col gap-2">
+                    <strong class="font-bold mb-2">{{ specialTransform.label }}</strong>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <div v-for="(specialValue, specialKey) in specialTransform.actions" :key="specialKey" :class="[selectedSpecialFormat === specialKey ? 'bg-blue-50 border-blue-700 hover:border-blue-700' : 'border-gray-200','flex pl-4 py-1 border items-center rounded cursor-pointer hover:border-blue-400 transition-all']">
+                            <input type="radio" :id="specialKey" :name="specialValue.label" :value="specialKey" v-model="selectedSpecialFormat" name="specialTransform" class="w-4 h-4">
+                            <label :for="specialKey" class="pl-2 w-full py-2 pr-4 cursor-pointer">{{ specialValue.label }}</label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="flex w-full flex-col gap-2">
-                <strong class="font-bold mb-2">{{ replace.label }}</strong>
-                <div class="flex flex-col w-full gap-2">
-                    <ReplaceText :value="inputText" @replacedText="getReplacedText"></ReplaceText>
+                <div class="flex w-full flex-col gap-2">
+                    <strong class="font-bold mb-2">{{ replace.label }}</strong>
+                    <div class="flex flex-col w-full gap-2">
+                        <ReplaceText :value="inputText" @replacedText="getReplacedText"></ReplaceText>
+                    </div>
                 </div>
             </div>
 
