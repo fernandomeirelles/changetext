@@ -39,6 +39,7 @@ export default {
     return {
       inputText: '',
       substitutions: [{ searchTerm: "", replaceTerm: "" }],
+      componentKey: 0,
     };
   },
   computed: {
@@ -65,7 +66,10 @@ export default {
     },
     emitFormattedText(data) {
       this.$emit("replacedText", data);
-    }
+    },
+    forceRerender() {
+      this.componentKey += 1;
+    },
   },
 };
 </script>

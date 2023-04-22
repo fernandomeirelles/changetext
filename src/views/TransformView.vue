@@ -4,6 +4,7 @@
     import Header from '../components/template/Header.vue'
     import Footer  from '../components/template/Footer.vue'
     import ChangeText from '../components/articles/ChangeText.vue'
+    import { ref } from 'vue';
 </script>
 
 <template>
@@ -63,7 +64,7 @@
                 <div class="flex w-full flex-col gap-2">
                     <strong class="font-bold mb-2">{{ replace.label }}</strong>
                     <div class="flex flex-col w-full gap-2">
-                        <ReplaceText :value="inputText" @replacedText="getReplacedText"></ReplaceText>
+                        <ReplaceText :key="componentKey" :value="inputText" @replacedText="getReplacedText"></ReplaceText>
                     </div>
                 </div>
             </div>
@@ -93,6 +94,7 @@ export default {
     },
     data() {
         return {
+            componentKey: ref(0),
             inputText: '',
             selectedFormat: 'notChange',
             selectedSpecialFormat: 'notChangeSpecial',
@@ -563,6 +565,8 @@ export default {
                     action.value = false;
                 })
             })
+            
+            this.componentKey += 1;
         },
     },
     watch: {
