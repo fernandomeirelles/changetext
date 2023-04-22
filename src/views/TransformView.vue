@@ -19,7 +19,7 @@
             <div ref="inputTextRef" @scroll="handleSCroll" class="flex flex-col sm:flex-row gap-4 bg-white pt-4 pb-2 lg:sticky lg:top-0">
                 <div class="flex flex-col gap">
                     <label class="font-bold mb-2" for="inputText">{{ $t('message.inputTextArea.label') }}</label>
-                    <textarea id="inputText" class="focus:border-blue-700 border w-full py-2 px-3 rounded" v-model="inputText" rows="6" cols="100"></textarea>
+                    <textarea autofocus="true" id="inputText" class="focus:border-blue-700 border w-full py-2 px-3 rounded" v-model="inputText" rows="6" cols="100"></textarea>
                 </div>
                 <div class="flex flex-col gap relative">
                     <label class="font-bold mb-2" for="outputTextArea">{{ $t('message.outputTextArea.label') }}</label>
