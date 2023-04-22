@@ -71,8 +71,7 @@
 
             <div ref="actionsBarRef" class="flex gap-4 sticky bottom-0 bg-white py-4 border-t-2 border-gray-100">
                 <Button size="xl" shadow color="default" @click="transformText">{{ $t('message.buttons.transform') }}</Button>
-                <!--<Button size="xl" shadow color="alternative" @click="copyToClipboard">{{ $t('message.buttons.copyResult') }}</Button>-->
-                <Button size="xl" shadow color="alternative" @click="clearForm">Limpar</Button>
+                <Button size="xl" shadow color="alternative" @click="clearForm">{{ $t('message.buttons.clearForm') }}</Button>
             </div>
         </div>
 

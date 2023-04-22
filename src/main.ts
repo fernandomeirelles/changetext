@@ -23,6 +23,7 @@ const messages = {
       buttons: {
         transform: "Transform",
         copyResult: "Copy result",
+        clearForm: "Clear",
       },
       i18n: {
         'pt-br': "Portuguese",
@@ -193,6 +194,7 @@ const messages = {
       buttons: {
         transform: "Transformar",
         copyResult: "Copiar resultado",
+        clearForm: "Limpar",
       },
       i18n: {
         'pt-br': "Português",
