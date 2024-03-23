@@ -353,7 +353,8 @@ const messages = {
 }
 
 const i18n = createI18n({
-  locale: getBrowserLocale(),
+  //locale: getBrowserLocale(),
+  locale: 'en',
   fallbackLocale: 'en',
   messages,
 })
